@@ -312,7 +312,7 @@
     line-height: 1.6;
   }
 
-  /* ==================== هدر ==================== */
+  /* ==================== هدر برنامه ==================== */
   .header {
     display: flex;
     justify-content: space-between;
@@ -391,7 +391,7 @@
     border-color: var(--accent);
   }
 
-  /* ==================== بقیه استایل‌ها ==================== */
+  /* ==================== بقیه ==================== */
   .capture-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -954,6 +954,202 @@
   .page { display: none; }
   .page.active { display: block; }
 
+  /* ==================== پنل ادمین ==================== */
+  .admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 5px;
+  }
+
+  .stat-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 20px;
+    background: var(--glass-bg);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 100%;
+    background: var(--gold-gradient);
+    opacity: 0.08;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+    border-color: var(--accent);
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+  }
+
+  .stat-info { flex: 1; }
+
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #8a6d0e;
+    line-height: 1.2;
+  }
+
+  [data-theme="dark"] .stat-value { color: var(--accent); }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    margin-top: 3px;
+  }
+
+  .users-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+  }
+
+  .user-card {
+    padding: 18px;
+    background: var(--glass-bg);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .user-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 4px; height: 100%;
+    background: var(--gold-gradient);
+  }
+
+  .user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(212, 175, 55, 0.25);
+    border-color: var(--accent);
+  }
+
+  .user-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .user-avatar-lg {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gold-gradient);
+    color: #1a1408;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    flex-shrink: 0;
+  }
+
+  .user-title {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .user-fullname {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-code {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    font-family: 'Courier New', monospace;
+  }
+
+  .user-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.83rem;
+    border-bottom: 1px dashed var(--glass-border);
+  }
+
+  .user-info-row:last-of-type { border-bottom: none; }
+
+  .user-info-label { color: var(--text-soft); }
+  .user-info-value { font-weight: 600; color: var(--text); }
+
+  .user-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .user-actions .btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .admin-select {
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1.5px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+    min-width: 160px;
+  }
+
+  .admin-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+  }
+
+  .admin-select option {
+    background: #fff;
+    color: #1a1814;
+  }
+
+  [data-theme="dark"] .admin-select option {
+    background: #1a1814;
+    color: #f5e9c8;
+  }
+
+  .badge-user {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--gold-gradient);
+    color: #1a1408;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    margin-right: 5px;
+  }
+
   @media (max-width: 700px) {
     body { padding: 15px 12px; }
     .glass-card { padding: 20px; border-radius: 18px; }
@@ -966,6 +1162,10 @@
     .auth-card { padding: 30px 22px; }
     .header { flex-direction: column; align-items: stretch; }
     .header-actions { justify-content: center; }
+    .admin-stats { grid-template-columns: repeat(2, 1fr); }
+    .users-list { grid-template-columns: 1fr; }
+    .stat-icon { font-size: 1.5rem; }
+    .stat-value { font-size: 1.2rem; }
   }
 
   ::-webkit-scrollbar { width: 10px; }
@@ -997,8 +1197,8 @@
 
       <form class="auth-form" id="loginForm">
         <div class="auth-field">
-          <label>👤 نام کاربری</label>
-          <input type="text" id="loginUsername" placeholder="نام کاربری خود را وارد کنید" autocomplete="username" required>
+          <label>🆔 کد ملی</label>
+          <input type="text" id="loginUsername" placeholder="کد ملی ۱۰ رقمی" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" autocomplete="username" required>
         </div>
         <div class="auth-field">
           <label>🔒 رمز عبور</label>
@@ -1009,8 +1209,12 @@
 
       <form class="auth-form" id="registerForm" style="display: none;">
         <div class="auth-field">
-          <label>👤 نام کاربری</label>
-          <input type="text" id="regUsername" placeholder="حداقل ۳ کاراکتر (فقط حروف و اعداد)" autocomplete="username" required>
+          <label>👤 نام و نام خانوادگی</label>
+          <input type="text" id="regFullName" placeholder="مثلاً علی محمدی" autocomplete="name" required>
+        </div>
+        <div class="auth-field">
+          <label>🆔 کد ملی</label>
+          <input type="text" id="regUsername" placeholder="کد ملی ۱۰ رقمی" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" autocomplete="username" required>
         </div>
         <div class="auth-field">
           <label>🔒 رمز عبور</label>
@@ -1027,7 +1231,7 @@
   </div>
 </div>
 
-<!-- ==================== صفحه اصلی ==================== -->
+<!-- ==================== صفحه کاربر ==================== -->
 <div class="page" id="appPage">
   <div class="container">
     <div class="glass-card">
@@ -1131,6 +1335,109 @@
   </div>
 </div>
 
+<!-- ==================== صفحه ادمین ==================== -->
+<div class="page" id="adminPage">
+  <div class="container">
+    <div class="glass-card">
+      <div class="header">
+        <div>
+          <h1 class="title">👑 پنل مدیریت</h1>
+          <p class="subtitle">مدیریت کاربران و رسیدها</p>
+        </div>
+        <div class="header-right">
+          <div class="user-badge">
+            <span class="avatar">👑</span>
+            <span>مدیر سیستم</span>
+          </div>
+          <div class="header-actions">
+            <button class="icon-toggle" id="adminThemeToggle" title="تغییر تم">🌙</button>
+            <button class="icon-toggle" id="adminLogoutBtn" title="خروج">🚪</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-stats" id="adminStats">
+        <div class="stat-card">
+          <span class="stat-icon">👥</span>
+          <div class="stat-info">
+            <div class="stat-value" id="statUsers">0</div>
+            <div class="stat-label">کاربر</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🧾</span>
+          <div class="stat-info">
+            <div class="stat-value" id="statReceipts">0</div>
+            <div class="stat-label">رسید</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">💰</span>
+          <div class="stat-info">
+            <div class="stat-value" id="statAmount">0</div>
+            <div class="stat-label">مجموع (تومان)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">📅</span>
+          <div class="stat-info">
+            <div class="stat-value" id="statToday">0</div>
+            <div class="stat-label">امروز</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <div class="section-header">
+        <h3>👥 کاربران</h3>
+        <div class="badge">
+          <span>📊</span> <span id="usersCountText">0 کاربر</span>
+        </div>
+      </div>
+
+      <div class="users-list" id="usersList"></div>
+
+      <div class="empty-state" id="usersEmpty" style="display: none;">
+        <span class="icon">👤</span>
+        هنوز کاربری ثبت‌نام نکرده
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <div class="section-header">
+        <h3>📚 همه رسیدها</h3>
+        <div class="badge">
+          <span>🧾</span> <span id="allReceiptsCount">0 رسید</span>
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <span class="icon">🔍</span>
+          <input type="text" id="adminSearchInput" placeholder="جستجو: نام، کد ملی، کلاس، توضیحات...">
+        </div>
+        <select id="adminFilterUser" class="admin-select">
+          <option value="">همه کاربران</option>
+        </select>
+        <button class="btn btn-primary" id="adminExportPdfBtn" disabled>
+          <span>📄</span> PDF کامل
+        </button>
+        <button class="btn btn-danger" id="adminDeleteAllReceiptsBtn" disabled>
+          <span>🗑️</span> پاک کردن همه رسیدها
+        </button>
+      </div>
+
+      <div class="gallery" id="adminGallery"></div>
+
+      <div class="empty-state" id="adminEmpty">
+        <span class="icon">📭</span>
+        هنوز رسیدی ثبت نشده
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- مودال مشاهده -->
 <div class="modal-overlay" id="viewModal">
   <div class="modal">
@@ -1179,8 +1486,10 @@ function getTheme() {
 function applyTheme(theme) {
   html.setAttribute('data-theme', theme);
   document.body.setAttribute('data-theme', theme);
-  themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-  themeToggle.setAttribute('title', theme === 'dark' ? 'حالت روشن' : 'حالت تیره');
+  if (themeToggle) themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+  if (themeToggle) themeToggle.setAttribute('title', theme === 'dark' ? 'حالت روشن' : 'حالت تیره');
+  const adminBtn = document.getElementById('adminThemeToggle');
+  if (adminBtn) adminBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
 }
 
 applyTheme(getTheme());
@@ -1191,6 +1500,19 @@ themeToggle.addEventListener('click', () => {
   applyTheme(next);
   localStorage.setItem('theme', next);
 });
+
+/* ==================== اعتبارسنجی کد ملی ==================== */
+function validateIranianNationalId(code) {
+  if (!/^\d{10}$/.test(code)) return false;
+  if (/^(\d)\1{9}$/.test(code)) return false;
+  const check = parseInt(code[9], 10);
+  let sum = 0;
+  for (let i = 0; i < 9; i++) {
+    sum += parseInt(code[i], 10) * (10 - i);
+  }
+  const remainder = sum % 11;
+  return (remainder < 2 && check === remainder) || (remainder >= 2 && check === 11 - remainder);
+}
 
 /* ==================== احراز هویت ==================== */
 function getUsers() {
@@ -1220,12 +1542,74 @@ function setCurrentUser(u) {
 
 function getReceiptsKey(username) { return `receipts_${username}`; }
 
+/* ==================== ادمین ==================== */
+const ADMIN_CODE = '0000000000';
+const ADMIN_PASS_DEFAULT = 'admin1234';
+
+function isAdmin() {
+  return currentUser === ADMIN_CODE;
+}
+
+async function ensureAdminExists() {
+  const users = getUsers();
+  if (!users[ADMIN_CODE]) {
+    users[ADMIN_CODE] = {
+      nationalCode: ADMIN_CODE,
+      fullName: 'مدیر سیستم',
+      passwordHash: await simpleHash(ADMIN_PASS_DEFAULT),
+      isAdmin: true,
+      createdAt: new Date().toISOString()
+    };
+    saveUsers(users);
+  }
+}
+
+function getAllReceipts() {
+  const users = getUsers();
+  const all = [];
+  Object.keys(users).forEach(code => {
+    if (code === ADMIN_CODE) return;
+    const user = users[code];
+    try {
+      const userReceipts = JSON.parse(localStorage.getItem(`receipts_${code}`) || '[]');
+      if (Array.isArray(userReceipts)) {
+        userReceipts.forEach(r => {
+          all.push({
+            ...r,
+            owner: code,
+            ownerName: user.fullName || code,
+            ownerCode: code
+          });
+        });
+      }
+    } catch (e) { /* ignore */ }
+  });
+  all.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return all;
+}
+
 /* ==================== صفحه‌ها ==================== */
 const authPage = document.getElementById('authPage');
 const appPage = document.getElementById('appPage');
+const adminPage = document.getElementById('adminPage');
 
-function showApp() { authPage.classList.remove('active'); appPage.classList.add('active'); }
-function showAuth() { appPage.classList.remove('active'); authPage.classList.add('active'); }
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+}
+
+function showApp() { showPage('appPage'); }
+function showAuth() { showPage('authPage'); }
+
+function showAdminPanel() {
+  showPage('adminPage');
+  const adminBtn = document.getElementById('adminThemeToggle');
+  if (adminBtn) adminBtn.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+  renderAdminStats();
+  renderUsersList();
+  populateUserFilter();
+  renderAdminGallery();
+}
 
 /* ==================== تب‌ها ==================== */
 const tabs = document.querySelectorAll('.auth-tab');
@@ -1257,51 +1641,56 @@ tabs.forEach(tab => {
 /* ==================== ثبت‌نام ==================== */
 registerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const username = document.getElementById('regUsername').value.trim();
+  const fullName = document.getElementById('regFullName').value.trim();
+  const nationalCode = document.getElementById('regUsername').value.trim();
   const pass1 = document.getElementById('regPassword').value;
   const pass2 = document.getElementById('regPassword2').value;
 
-  if (username.length < 3) return showError('نام کاربری باید حداقل ۳ کاراکتر باشد');
-  if (!/^[a-zA-Z0-9_\u0600-\u06FF]+$/.test(username)) return showError('نام کاربری فقط می‌تواند شامل حروف، اعداد و _ باشد');
+  if (fullName.length < 3) return showError('نام و نام خانوادگی را کامل وارد کنید');
+  if (!/^[\u0600-\u06FFa-zA-Z\s]+$/.test(fullName)) return showError('نام فقط می‌تواند شامل حروف فارسی/انگلیسی باشد');
+  if (!/^\d{10}$/.test(nationalCode)) return showError('کد ملی باید ۱۰ رقم عددی باشد');
+  if (nationalCode === ADMIN_CODE) return showError('این کد ملی قابل استفاده نیست');
+  if (!validateIranianNationalId(nationalCode)) return showError('کد ملی وارد شده معتبر نیست');
   if (pass1.length < 4) return showError('رمز عبور باید حداقل ۴ کاراکتر باشد');
   if (pass1 !== pass2) return showError('رمزهای عبور یکسان نیستند');
 
   const users = getUsers();
-  const key = username.toLowerCase();
-  if (users[key]) return showError('این نام کاربری قبلاً ثبت شده');
+  if (users[nationalCode]) return showError('این کد ملی قبلاً ثبت شده است');
 
-  users[key] = {
-    username: username,
+  users[nationalCode] = {
+    nationalCode: nationalCode,
+    fullName: fullName,
     passwordHash: await simpleHash(pass1),
     createdAt: new Date().toISOString()
   };
   saveUsers(users);
 
-  setCurrentUser(key);
+  setCurrentUser(nationalCode);
   registerForm.reset();
   initApp();
-  showToast(`🎉 خوش آمدی ${username}!`);
+  showToast(`🎉 خوش آمدی ${fullName}!`);
 });
 
 /* ==================== ورود ==================== */
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const username = document.getElementById('loginUsername').value.trim().toLowerCase();
+  const nationalCode = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value;
 
-  if (!username || !password) return showError('نام کاربری و رمز عبور را وارد کنید');
+  if (!nationalCode || !password) return showError('کد ملی و رمز عبور را وارد کنید');
+  if (!/^\d{10}$/.test(nationalCode)) return showError('کد ملی باید ۱۰ رقم عددی باشد');
 
   const users = getUsers();
-  const user = users[username];
-  if (!user) return showError('نام کاربری یا رمز عبور اشتباه است');
+  const user = users[nationalCode];
+  if (!user) return showError('کد ملی یا رمز عبور اشتباه است');
 
   const hash = await simpleHash(password);
-  if (hash !== user.passwordHash) return showError('نام کاربری یا رمز عبور اشتباه است');
+  if (hash !== user.passwordHash) return showError('کد ملی یا رمز عبور اشتباه است');
 
-  setCurrentUser(username);
+  setCurrentUser(nationalCode);
   loginForm.reset();
   initApp();
-  showToast(`👋 خوش آمدی ${user.username}!`);
+  showToast(`👋 خوش آمدی ${user.fullName || user.nationalCode}!`);
 });
 
 /* ==================== خروج ==================== */
@@ -1473,7 +1862,8 @@ saveBtn.addEventListener('click', () => {
     amount: amount.value ? Number(amount.value) : null,
     description: description.value.trim(),
     date: new Date().toISOString(),
-    owner: currentUser
+    owner: currentUser,
+    nationalCode: currentUser
   }));
 
   receipts = [...newReceipts, ...receipts];
@@ -1497,7 +1887,7 @@ function clearForm() {
 
 clearFormBtn.addEventListener('click', () => { clearForm(); showToast('🔄 فرم پاک شد'); });
 
-/* ==================== گالری ==================== */
+/* ==================== گالری کاربر ==================== */
 function renderGallery() {
   const query = searchInput.value.trim().toLowerCase();
   filteredReceipts = receipts.filter(r => {
@@ -1565,6 +1955,14 @@ function formatDate(iso) {
   } catch { return d.toLocaleString(); }
 }
 
+function formatShortDate(iso) {
+  try {
+    return new Date(iso).toLocaleDateString('fa-IR', {
+      year: 'numeric', month: 'short', day: 'numeric'
+    });
+  } catch { return '—'; }
+}
+
 /* ==================== حذف ==================== */
 function deleteReceipt(id) {
   if (!confirm('این رسید حذف شود؟')) return;
@@ -1601,6 +1999,10 @@ function openViewModal(id) {
       <div class="detail-value">${escapeHtml(r.fullName)}</div>
     </div>
     <div class="detail-row">
+      <div class="detail-label">🆔 کد ملی</div>
+      <div class="detail-value">${toPersianDigits(escapeHtml(r.nationalCode || currentUser))}</div>
+    </div>
+    <div class="detail-row">
       <div class="detail-label">🎓 شماره کلاس</div>
       <div class="detail-value">${escapeHtml(r.classNumber)}</div>
     </div>
@@ -1623,7 +2025,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') { closeModal('viewModal'); closeCamera(); }
 });
 
-/* ==================== توابع کمکی فارسی ==================== */
+/* ==================== توابع فارسی ==================== */
 function toPersianDigits(str) {
   const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
   return String(str).replace(/\d/g, d => persianDigits[d]);
@@ -1638,170 +2040,347 @@ function formatDateForPdf(iso) {
   } catch { return d.toLocaleString(); }
 }
 
-/* ==================== ساخت هدر لوکس PDF ==================== */
+/* ==================== رسم ردیف جدول ==================== */
+function drawTableRow(ctx, opts) {
+  const { label, value, labelY, colSplit, tableX, tableW, valueColor, valueSize, bold } = opts;
+
+  ctx.fillStyle = '#6b5d3e';
+  ctx.font = '18px Vazirmatn, Tahoma, Arial';
+  ctx.textAlign = 'right';
+  ctx.direction = 'rtl';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(label, tableX + tableW - 20, labelY);
+
+  ctx.fillStyle = valueColor || '#1c1814';
+  ctx.font = `${bold ? 'bold ' : ''}${valueSize}px Vazirmatn, Tahoma, Arial`;
+  ctx.textAlign = 'center';
+  ctx.direction = 'rtl';
+  ctx.fillText(value, tableX + (colSplit - tableX) / 2, labelY);
+}
+
+/* ==================== هدر PDF کاربر ==================== */
 async function createHeaderImage(receipt, number, total, username) {
   const W = 1400;
-  const H = 340;
+  const H = 400;
   const canvas = document.createElement('canvas');
   canvas.width = W;
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  // ===== پس‌زمینه کرم روشن =====
   ctx.fillStyle = '#faf8f3';
   ctx.fillRect(0, 0, W, H);
 
-  // ===== قاب تزئینی دوتایی طلایی =====
   const gradient = ctx.createLinearGradient(0, 0, W, H);
   gradient.addColorStop(0, '#d4af37');
   gradient.addColorStop(0.5, '#f5d97a');
   gradient.addColorStop(1, '#c9a227');
 
-  // قاب بیرونی
   ctx.strokeStyle = gradient;
   ctx.lineWidth = 4;
   ctx.strokeRect(15, 15, W - 30, H - 30);
 
-  // قاب درونی نازک
   ctx.strokeStyle = 'rgba(201, 162, 39, 0.5)';
   ctx.lineWidth = 1.5;
   ctx.strokeRect(24, 24, W - 48, H - 48);
 
-  // گوشه‌های تزئینی (4 گوشه)
   ctx.strokeStyle = gradient;
   ctx.lineWidth = 4;
-  const cornerSize = 35;
-  // بالا راست
-  ctx.beginPath(); ctx.moveTo(W - 25, 25 + cornerSize); ctx.lineTo(W - 25, 25); ctx.lineTo(W - 25 - cornerSize, 25); ctx.stroke();
-  // بالا چپ
-  ctx.beginPath(); ctx.moveTo(25, 25 + cornerSize); ctx.lineTo(25, 25); ctx.lineTo(25 + cornerSize, 25); ctx.stroke();
-  // پایین راست
-  ctx.beginPath(); ctx.moveTo(W - 25, H - 25 - cornerSize); ctx.lineTo(W - 25, H - 25); ctx.lineTo(W - 25 - cornerSize, H - 25); ctx.stroke();
-  // پایین چپ
-  ctx.beginPath(); ctx.moveTo(25, H - 25 - cornerSize); ctx.lineTo(25, H - 25); ctx.lineTo(25 + cornerSize, H - 25); ctx.stroke();
+  const cs = 35;
+  ctx.beginPath(); ctx.moveTo(W - 25, 25 + cs); ctx.lineTo(W - 25, 25); ctx.lineTo(W - 25 - cs, 25); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(25, 25 + cs); ctx.lineTo(25, 25); ctx.lineTo(25 + cs, 25); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(W - 25, H - 25 - cs); ctx.lineTo(W - 25, H - 25); ctx.lineTo(W - 25 - cs, H - 25); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(25, H - 25 - cs); ctx.lineTo(25, H - 25); ctx.lineTo(25 + cs, H - 25); ctx.stroke();
 
-  // ===== لوگو تزئینی بالا وسط =====
-  ctx.font = 'bold 42px Vazirmatn, Tahoma, Arial';
+  ctx.font = 'bold 40px Vazirmatn, Tahoma, Arial';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
   ctx.direction = 'rtl';
   ctx.fillStyle = '#8a6d0e';
-  ctx.fillText('✦ رسید مالی ✦', W / 2, 45);
+  ctx.fillText('✦ رسید مالی ✦', W / 2, 42);
 
-  // ===== خط جداکننده طلایی زیر لوگو =====
   ctx.strokeStyle = gradient;
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(W / 2 - 150, 105);
-  ctx.lineTo(W / 2 + 150, 105);
+  ctx.moveTo(W / 2 - 150, 100);
+  ctx.lineTo(W / 2 + 150, 100);
   ctx.stroke();
 
-  // ===== عنوان "رسید شماره X" =====
   ctx.fillStyle = '#1c1814';
-  ctx.font = 'bold 32px Vazirmatn, Tahoma, Arial';
+  ctx.font = 'bold 28px Vazirmatn, Tahoma, Arial';
   ctx.textAlign = 'right';
   ctx.direction = 'rtl';
-  ctx.fillText(`رسید شماره ${toPersianDigits(String(number))}`, W - 60, 130);
+  ctx.fillText(`رسید شماره ${toPersianDigits(String(number))}`, W - 55, 120);
 
-  // ===== جدول اطلاعات =====
-  const tableY = 175;
-  const tableX = 60;
-  const tableW = W - 120;
-  const rowH = 40;
+  const tableX = 55;
+  const tableW = W - 110;
+  const tableY = 165;
+  const rowH = 45;
+  const colSplit = tableX + tableW * 0.35;
 
-  // خط‌های جدول
   ctx.strokeStyle = 'rgba(201, 162, 39, 0.4)';
   ctx.lineWidth = 1;
-
-  // سطر اول: نام
-  ctx.beginPath(); ctx.moveTo(tableX, tableY); ctx.lineTo(tableX + tableW, tableY); ctx.stroke();
-  // سطر دوم: شماره کلاس + تاریخ
-  ctx.beginPath(); ctx.moveTo(tableX, tableY + rowH); ctx.lineTo(tableX + tableW, tableY + rowH); ctx.stroke();
-  // سطر سوم: مبلغ
-  ctx.beginPath(); ctx.moveTo(tableX, tableY + rowH * 2); ctx.lineTo(tableX + tableW, tableY + rowH * 2); ctx.stroke();
-  // خط پایین
-  ctx.beginPath(); ctx.moveTo(tableX, tableY + rowH * 3); ctx.lineTo(tableX + tableW, tableY + rowH * 3); ctx.stroke();
-
-  // خط عمودی وسط
-  ctx.beginPath(); ctx.moveTo(tableX + tableW / 2, tableY); ctx.lineTo(tableX + tableW / 2, tableY + rowH * 3); ctx.stroke();
-
-  // ===== محتوای جدول =====
-  ctx.textBaseline = 'middle';
-  ctx.direction = 'rtl';
-  ctx.font = 'bold 22px Vazirmatn, Tahoma, Arial';
-
-  // سطر 1 - راست: نام، چپ: نام خانوادگی
-  ctx.fillStyle = '#6b5d3e';
-  ctx.textAlign = 'right';
-  ctx.font = '18px Vazirmatn, Tahoma, Arial';
-  ctx.fillText('نام و نام خانوادگی', tableX + tableW - 15, tableY + rowH / 2);
-  
-  ctx.fillStyle = '#1c1814';
-  ctx.font = 'bold 24px Vazirmatn, Tahoma, Arial';
-  ctx.fillText(receipt.fullName, tableX + tableW / 2 - 15, tableY + rowH / 2);
-
-  // سطر 2 - راست: شماره کلاس، چپ: تاریخ
-  ctx.fillStyle = '#6b5d3e';
-  ctx.textAlign = 'right';
-  ctx.font = '18px Vazirmatn, Tahoma, Arial';
-  ctx.fillText('شماره کلاس', tableX + tableW - 15, tableY + rowH + rowH / 2);
-
-  ctx.fillStyle = '#8a6d0e';
-  ctx.font = 'bold 24px Vazirmatn, Tahoma, Arial';
-  ctx.fillText(receipt.classNumber, tableX + tableW / 2 - 15, tableY + rowH + rowH / 2);
-
-  // تاریخ سمت چپ
-  ctx.fillStyle = '#6b5d3e';
-  ctx.font = '18px Vazirmatn, Tahoma, Arial';
-  ctx.fillText('تاریخ ثبت', tableX + tableW / 2 + tableW / 2 - 15, tableY + rowH + rowH / 2);
-
-  ctx.fillStyle = '#1c1814';
-  ctx.font = 'bold 20px Vazirmatn, Tahoma, Arial';
-  const dateStr = formatDateForPdf(receipt.date);
-  ctx.fillText(dateStr, tableX + tableW / 2 - 15, tableY + rowH + rowH / 2);
-
-  // سطر 3 - مبلغ
-  ctx.fillStyle = '#6b5d3e';
-  ctx.font = '18px Vazirmatn, Tahoma, Arial';
-  ctx.fillText('مبلغ کل', tableX + tableW - 15, tableY + rowH * 2 + rowH / 2);
-
-  if (receipt.amount) {
-    ctx.fillStyle = '#8a6d0e';
-    ctx.font = 'bold 26px Vazirmatn, Tahoma, Arial';
-    ctx.fillText(`${toPersianDigits(receipt.amount.toLocaleString('en-US'))} تومان`, tableX + tableW / 2 - 15, tableY + rowH * 2 + rowH / 2);
-  } else {
-    ctx.fillStyle = '#999';
-    ctx.font = '20px Vazirmatn, Tahoma, Arial';
-    ctx.fillText('— ثبت نشده —', tableX + tableW / 2 - 15, tableY + rowH * 2 + rowH / 2);
+  for (let i = 0; i <= 4; i++) {
+    ctx.beginPath();
+    ctx.moveTo(tableX, tableY + i * rowH);
+    ctx.lineTo(tableX + tableW, tableY + i * rowH);
+    ctx.stroke();
   }
 
-  // ===== توضیحات پایین =====
+  ctx.beginPath();
+  ctx.moveTo(colSplit, tableY);
+  ctx.lineTo(colSplit, tableY + 4 * rowH);
+  ctx.stroke();
+
+  drawTableRow(ctx, {
+    label: 'نام و نام خانوادگی',
+    value: receipt.fullName,
+    labelY: tableY + rowH * 0.5,
+    colSplit, tableX, tableW,
+    valueColor: '#1c1814', valueSize: 24, bold: true
+  });
+
+  drawTableRow(ctx, {
+    label: 'کد ملی',
+    value: toPersianDigits(receipt.nationalCode || username || '—'),
+    labelY: tableY + rowH * 1.5,
+    colSplit, tableX, tableW,
+    valueColor: '#1c1814', valueSize: 22
+  });
+
+  drawTableRow(ctx, {
+    label: 'شماره کلاس',
+    value: receipt.classNumber || '—',
+    labelY: tableY + rowH * 2.5,
+    colSplit, tableX, tableW,
+    valueColor: '#8a6d0e', valueSize: 26, bold: true
+  });
+
+  drawTableRow(ctx, {
+    label: 'تاریخ ثبت',
+    value: formatDateForPdf(receipt.date),
+    labelY: tableY + rowH * 3.5,
+    colSplit, tableX, tableW,
+    valueColor: '#1c1814', valueSize: 20
+  });
+
+  if (receipt.amount) {
+    const amountY = tableY + 4 * rowH + 10;
+    const amountBoxH = 42;
+
+    ctx.fillStyle = 'rgba(212, 175, 55, 0.12)';
+    ctx.fillRect(tableX, amountY, tableW, amountBoxH);
+
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(tableX, amountY, tableW, amountBoxH);
+
+    ctx.fillStyle = '#6b5d3e';
+    ctx.font = 'bold 18px Vazirmatn, Tahoma, Arial';
+    ctx.textAlign = 'right';
+    ctx.direction = 'rtl';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('مبلغ کل:', tableX + tableW - 20, amountY + amountBoxH / 2);
+
+    ctx.fillStyle = '#8a6d0e';
+    ctx.font = 'bold 26px Vazirmatn, Tahoma, Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(
+      `${toPersianDigits(receipt.amount.toLocaleString('en-US'))} تومان`,
+      tableX + tableW / 2 - 30,
+      amountY + amountBoxH / 2
+    );
+  }
+
   if (receipt.description) {
     ctx.fillStyle = '#6b5d3e';
     ctx.font = '16px Vazirmatn, Tahoma, Arial';
     ctx.textAlign = 'right';
+    ctx.direction = 'rtl';
+    ctx.textBaseline = 'middle';
     let desc = receipt.description;
-    if (desc.length > 80) desc = desc.substring(0, 80) + '...';
-    ctx.fillText(`📝 توضیحات: ${desc}`, W - 60, H - 30);
+    if (desc.length > 90) desc = desc.substring(0, 90) + '...';
+    ctx.fillText(`📝 ${desc}`, W - 55, H - 42);
   }
 
-  // ===== امضا =====
-  ctx.fillStyle = '#a89570';
-  ctx.font = 'italic 20px "Great Vibes", Vazirmatn, Tahoma, cursive';
-  ctx.textAlign = 'left';
-  ctx.direction = 'ltr';
-  ctx.fillText(username || 'User', 70, H - 30);
+  const users = getUsers();
+  const user = users[currentUser];
+  const displayName = (user && user.fullName) ? user.fullName : (username || 'User');
 
   ctx.fillStyle = '#8a6d0e';
   ctx.font = '14px Vazirmatn, Tahoma, Arial';
   ctx.textAlign = 'left';
   ctx.direction = 'rtl';
-  ctx.fillText('امضای دیجیتال', 70, H - 55);
+  ctx.textBaseline = 'middle';
+  ctx.fillText('امضای دیجیتال:', 55, H - 55);
+
+  ctx.fillStyle = '#a89570';
+  ctx.font = 'italic 22px "Great Vibes", Vazirmatn, Tahoma, cursive';
+  ctx.textAlign = 'left';
+  ctx.direction = 'ltr';
+  ctx.fillText(displayName, 55, H - 30);
 
   return canvas.toDataURL('image/png');
 }
 
-/* ==================== ساخت فوتر ==================== */
+/* ==================== هدر PDF ادمین ==================== */
+async function createAdminHeaderImage(receipt, number, total) {
+  const W = 1400;
+  const H = 445;
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#faf8f3';
+  ctx.fillRect(0, 0, W, H);
+
+  const gradient = ctx.createLinearGradient(0, 0, W, H);
+  gradient.addColorStop(0, '#d4af37');
+  gradient.addColorStop(0.5, '#f5d97a');
+  gradient.addColorStop(1, '#c9a227');
+
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 4;
+  ctx.strokeRect(15, 15, W - 30, H - 30);
+
+  ctx.strokeStyle = 'rgba(201, 162, 39, 0.5)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(24, 24, W - 48, H - 48);
+
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 4;
+  const cs = 35;
+  ctx.beginPath(); ctx.moveTo(W - 25, 25 + cs); ctx.lineTo(W - 25, 25); ctx.lineTo(W - 25 - cs, 25); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(25, 25 + cs); ctx.lineTo(25, 25); ctx.lineTo(25 + cs, 25); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(W - 25, H - 25 - cs); ctx.lineTo(W - 25, H - 25); ctx.lineTo(W - 25 - cs, H - 25); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(25, H - 25 - cs); ctx.lineTo(25, H - 25); ctx.lineTo(25 + cs, H - 25); ctx.stroke();
+
+  ctx.font = 'bold 40px Vazirmatn, Tahoma, Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.direction = 'rtl';
+  ctx.fillStyle = '#8a6d0e';
+  ctx.fillText('✦ رسید مالی ✦', W / 2, 42);
+
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(W / 2 - 150, 100);
+  ctx.lineTo(W / 2 + 150, 100);
+  ctx.stroke();
+
+  ctx.fillStyle = '#1c1814';
+  ctx.font = 'bold 26px Vazirmatn, Tahoma, Arial';
+  ctx.textAlign = 'right';
+  ctx.direction = 'rtl';
+  ctx.fillText(`رسید شماره ${toPersianDigits(String(number))} از ${toPersianDigits(String(total))}`, W - 55, 118);
+
+  const tableX = 55;
+  const tableW = W - 110;
+  const tableY = 160;
+  const rowH = 45;
+  const colSplit = tableX + tableW * 0.35;
+
+  ctx.strokeStyle = 'rgba(201, 162, 39, 0.4)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 5; i++) {
+    ctx.beginPath();
+    ctx.moveTo(tableX, tableY + i * rowH);
+    ctx.lineTo(tableX + tableW, tableY + i * rowH);
+    ctx.stroke();
+  }
+
+  ctx.beginPath();
+  ctx.moveTo(colSplit, tableY);
+  ctx.lineTo(colSplit, tableY + 5 * rowH);
+  ctx.stroke();
+
+  ctx.fillStyle = 'rgba(212, 175, 55, 0.15)';
+  ctx.fillRect(tableX, tableY, tableW, rowH);
+
+  drawTableRow(ctx, {
+    label: '👤 صاحب حساب',
+    value: receipt.ownerName || receipt.ownerCode,
+    labelY: tableY + rowH * 0.5,
+    colSplit, tableX, tableW,
+    valueColor: '#8a6d0e', valueSize: 22, bold: true
+  });
+
+  drawTableRow(ctx, {
+    label: '👤 نام روی رسید',
+    value: receipt.fullName,
+    labelY: tableY + rowH * 1.5,
+    colSplit, tableX, tableW,
+    valueColor: '#1c1814', valueSize: 22, bold: true
+  });
+
+  drawTableRow(ctx, {
+    label: '🆔 کد ملی ثبت‌کننده',
+    value: toPersianDigits(receipt.ownerCode || '—'),
+    labelY: tableY + rowH * 2.5,
+    colSplit, tableX, tableW,
+    valueColor: '#1c1814', valueSize: 20
+  });
+
+  drawTableRow(ctx, {
+    label: '🎓 شماره کلاس',
+    value: receipt.classNumber || '—',
+    labelY: tableY + rowH * 3.5,
+    colSplit, tableX, tableW,
+    valueColor: '#8a6d0e', valueSize: 24, bold: true
+  });
+
+  drawTableRow(ctx, {
+    label: '📅 تاریخ ثبت',
+    value: formatDateForPdf(receipt.date),
+    labelY: tableY + rowH * 4.5,
+    colSplit, tableX, tableW,
+    valueColor: '#1c1814', valueSize: 18
+  });
+
+  if (receipt.amount) {
+    const amountY = tableY + 5 * rowH + 10;
+    const amountBoxH = 40;
+
+    ctx.fillStyle = 'rgba(212, 175, 55, 0.12)';
+    ctx.fillRect(tableX, amountY, tableW, amountBoxH);
+
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(tableX, amountY, tableW, amountBoxH);
+
+    ctx.fillStyle = '#6b5d3e';
+    ctx.font = 'bold 18px Vazirmatn, Tahoma, Arial';
+    ctx.textAlign = 'right';
+    ctx.direction = 'rtl';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('مبلغ کل:', tableX + tableW - 20, amountY + amountBoxH / 2);
+
+    ctx.fillStyle = '#8a6d0e';
+    ctx.font = 'bold 24px Vazirmatn, Tahoma, Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(
+      `${toPersianDigits(receipt.amount.toLocaleString('en-US'))} تومان`,
+      tableX + tableW / 2 - 30,
+      amountY + amountBoxH / 2
+    );
+  }
+
+  if (receipt.description) {
+    ctx.fillStyle = '#6b5d3e';
+    ctx.font = '16px Vazirmatn, Tahoma, Arial';
+    ctx.textAlign = 'right';
+    ctx.direction = 'rtl';
+    ctx.textBaseline = 'middle';
+    let desc = receipt.description;
+    if (desc.length > 90) desc = desc.substring(0, 90) + '...';
+    ctx.fillText(`📝 ${desc}`, W - 55, H - 40);
+  }
+
+  return canvas.toDataURL('image/png');
+}
+
+/* ==================== فوتر ==================== */
 async function createFooterImage(current, total) {
   const W = 500;
   const H = 60;
@@ -1810,10 +2389,8 @@ async function createFooterImage(current, total) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  // پس‌زمینه شفاف
   ctx.clearRect(0, 0, W, H);
 
-  // خط تزئینی
   const gradient = ctx.createLinearGradient(0, 0, W, 0);
   gradient.addColorStop(0, 'transparent');
   gradient.addColorStop(0.5, '#c9a227');
@@ -1825,7 +2402,6 @@ async function createFooterImage(current, total) {
   ctx.lineTo(W - 20, 10);
   ctx.stroke();
 
-  // متن
   ctx.fillStyle = '#96876a';
   ctx.font = 'bold 18px Vazirmatn, Tahoma, Arial';
   ctx.textAlign = 'center';
@@ -1840,7 +2416,7 @@ async function createFooterImage(current, total) {
   return canvas.toDataURL('image/png');
 }
 
-/* ==================== ساخت PDF ==================== */
+/* ==================== ساخت PDF کاربر ==================== */
 async function buildPdf() {
   if (receipts.length === 0) throw new Error('رسیدی وجود ندارد');
 
@@ -1854,7 +2430,6 @@ async function buildPdf() {
     const r = receipts[i];
     if (i > 0) pdf.addPage();
 
-    // ===== حاشیه طلایی تزئینی دور صفحه =====
     pdf.setDrawColor(201, 162, 39);
     pdf.setLineWidth(1.5);
     pdf.rect(5, 5, pageW - 10, pageH - 10);
@@ -1863,13 +2438,10 @@ async function buildPdf() {
     pdf.setLineWidth(0.5);
     pdf.rect(7, 7, pageW - 14, pageH - 14);
 
-    // ===== هدر با اطلاعات =====
     const headerImg = await createHeaderImage(r, i + 1, receipts.length, currentUser);
-    const headerHeight = 60;
-
+    const headerHeight = 70;
     pdf.addImage(headerImg, 'PNG', margin, margin + 3, pageW - margin * 2, headerHeight);
 
-    // ===== عکس رسید =====
     const imgTop = margin + 3 + headerHeight + 5;
     const maxW = pageW - margin * 2 - 6;
     const maxH = pageH - imgTop - margin - 15;
@@ -1883,31 +2455,24 @@ async function buildPdf() {
 
     const fmt = r.image.includes('image/png') ? 'PNG' : 'JPEG';
 
-    // کادر طلایی دور عکس
     pdf.setDrawColor(201, 162, 39);
     pdf.setLineWidth(0.6);
     pdf.rect(x - 1.5, y - 1.5, w + 3, h + 3);
 
-    // گوشه‌های تزئینی دور عکس
     pdf.setDrawColor(212, 175, 55);
     pdf.setLineWidth(1.2);
     const cs = 4;
-    // بالا چپ
     pdf.line(x - 3, y - 3, x - 3 + cs, y - 3);
     pdf.line(x - 3, y - 3, x - 3, y - 3 + cs);
-    // بالا راست
     pdf.line(x + w + 3 - cs, y - 3, x + w + 3, y - 3);
     pdf.line(x + w + 3, y - 3, x + w + 3, y - 3 + cs);
-    // پایین چپ
     pdf.line(x - 3, y + h + 3, x - 3 + cs, y + h + 3);
     pdf.line(x - 3, y + h + 3 - cs, x - 3, y + h + 3);
-    // پایین راست
     pdf.line(x + w + 3 - cs, y + h + 3, x + w + 3, y + h + 3);
     pdf.line(x + w + 3, y + h + 3 - cs, x + w + 3, y + h + 3);
 
     pdf.addImage(r.image, fmt, x, y, w, h);
 
-    // ===== فوتر =====
     const footerImg = await createFooterImage(i + 1, receipts.length);
     pdf.addImage(footerImg, 'PNG', pageW / 2 - 25, pageH - margin - 10, 50, 6);
   }
@@ -1915,7 +2480,74 @@ async function buildPdf() {
   return pdf;
 }
 
-/* ==================== خروجی PDF ==================== */
+/* ==================== ساخت PDF ادمین ==================== */
+async function buildAdminPdf() {
+  let allReceipts = getAllReceipts();
+  const query = document.getElementById('adminSearchInput').value.trim().toLowerCase();
+  const filterUser = document.getElementById('adminFilterUser').value;
+
+  if (filterUser) allReceipts = allReceipts.filter(r => r.ownerCode === filterUser);
+  if (query) {
+    allReceipts = allReceipts.filter(r =>
+      (r.fullName || '').toLowerCase().includes(query) ||
+      (r.classNumber || '').toLowerCase().includes(query) ||
+      (r.description || '').toLowerCase().includes(query) ||
+      (r.ownerCode || '').toLowerCase().includes(query) ||
+      (r.ownerName || '').toLowerCase().includes(query)
+    );
+  }
+
+  if (allReceipts.length === 0) throw new Error('رسیدی وجود ندارد');
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  const pageW = pdf.internal.pageSize.getWidth();
+  const pageH = pdf.internal.pageSize.getHeight();
+  const margin = 10;
+
+  for (let i = 0; i < allReceipts.length; i++) {
+    const r = allReceipts[i];
+    if (i > 0) pdf.addPage();
+
+    pdf.setDrawColor(201, 162, 39);
+    pdf.setLineWidth(1.5);
+    pdf.rect(5, 5, pageW - 10, pageH - 10);
+
+    pdf.setDrawColor(212, 175, 55);
+    pdf.setLineWidth(0.5);
+    pdf.rect(7, 7, pageW - 14, pageH - 14);
+
+    const headerImg = await createAdminHeaderImage(r, i + 1, allReceipts.length);
+    const headerHeight = 75;
+    pdf.addImage(headerImg, 'PNG', margin, margin + 3, pageW - margin * 2, headerHeight);
+
+    const imgTop = margin + 3 + headerHeight + 5;
+    const maxW = pageW - margin * 2 - 6;
+    const maxH = pageH - imgTop - margin - 15;
+
+    const dims = await getImageDimensions(r.image);
+    const ratio = Math.min(maxW / dims.width, maxH / dims.height);
+    const w = dims.width * ratio;
+    const h = dims.height * ratio;
+    const x = (pageW - w) / 2;
+    const y = imgTop + (maxH - h) / 2;
+
+    const fmt = r.image.includes('image/png') ? 'PNG' : 'JPEG';
+
+    pdf.setDrawColor(201, 162, 39);
+    pdf.setLineWidth(0.6);
+    pdf.rect(x - 1.5, y - 1.5, w + 3, h + 3);
+
+    pdf.addImage(r.image, fmt, x, y, w, h);
+
+    const footerImg = await createFooterImage(i + 1, allReceipts.length);
+    pdf.addImage(footerImg, 'PNG', pageW / 2 - 25, pageH - margin - 10, 50, 6);
+  }
+
+  return pdf;
+}
+
+/* ==================== خروجی PDF کاربر ==================== */
 exportPdfBtn.addEventListener('click', async () => {
   if (receipts.length === 0) return;
   const originalText = exportPdfBtn.innerHTML;
@@ -1942,7 +2574,6 @@ printBtn.addEventListener('click', async () => {
   printBtn.innerHTML = '<span>⏳</span> در حال آماده‌سازی...';
   try {
     const pdf = await buildPdf();
-    // باز کردن PDF در تب جدید برای چاپ
     const blob = pdf.output('blob');
     const url = URL.createObjectURL(blob);
     const printWindow = window.open(url, '_blank');
@@ -1981,8 +2612,330 @@ function showToast(message, type = 'success') {
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
+/* ==================== پنل ادمین ==================== */
+function renderAdminStats() {
+  const users = getUsers();
+  const allReceipts = getAllReceipts();
+  const userCount = Object.keys(users).filter(k => k !== ADMIN_CODE).length;
+  document.getElementById('statUsers').textContent = toPersianDigits(String(userCount));
+  document.getElementById('statReceipts').textContent = toPersianDigits(String(allReceipts.length));
+  const totalAmount = allReceipts.reduce((sum, r) => sum + (r.amount || 0), 0);
+  document.getElementById('statAmount').textContent = toPersianDigits(totalAmount.toLocaleString('en-US'));
+  const today = new Date().toDateString();
+  const todayCount = allReceipts.filter(r => new Date(r.date).toDateString() === today).length;
+  document.getElementById('statToday').textContent = toPersianDigits(String(todayCount));
+}
+
+function renderUsersList() {
+  const users = getUsers();
+  const container = document.getElementById('usersList');
+  const empty = document.getElementById('usersEmpty');
+  const userList = Object.keys(users).filter(k => k !== ADMIN_CODE);
+
+  if (userList.length === 0) {
+    container.innerHTML = '';
+    empty.style.display = 'block';
+    document.getElementById('usersCountText').textContent = '0 کاربر';
+    return;
+  }
+
+  empty.style.display = 'none';
+  container.innerHTML = '';
+
+  userList.forEach(code => {
+    const user = users[code];
+    let receiptCount = 0, totalAmount = 0;
+    try {
+      const userReceipts = JSON.parse(localStorage.getItem(`receipts_${code}`) || '[]');
+      receiptCount = userReceipts.length;
+      totalAmount = userReceipts.reduce((s, r) => s + (r.amount || 0), 0);
+    } catch (e) {}
+
+    const avatarChar = (user.fullName || code).trim().charAt(0);
+
+    const card = document.createElement('div');
+    card.className = 'user-card';
+    card.innerHTML = `
+      <div class="user-header">
+        <div class="user-avatar-lg">${escapeHtml(avatarChar)}</div>
+        <div class="user-title">
+          <div class="user-fullname">${escapeHtml(user.fullName || 'بدون نام')}</div>
+          <div class="user-code">🆔 ${toPersianDigits(escapeHtml(code))}</div>
+        </div>
+      </div>
+      <div class="user-info-row">
+        <span class="user-info-label">🧾 تعداد رسیدها</span>
+        <span class="user-info-value">${toPersianDigits(String(receiptCount))}</span>
+      </div>
+      <div class="user-info-row">
+        <span class="user-info-label">💰 مجموع مبلغ</span>
+        <span class="user-info-value">${toPersianDigits(totalAmount.toLocaleString('en-US'))} تومان</span>
+      </div>
+      <div class="user-info-row">
+        <span class="user-info-label">📅 تاریخ ثبت‌نام</span>
+        <span class="user-info-value">${formatShortDate(user.createdAt)}</span>
+      </div>
+      <div class="user-actions">
+        <button class="btn btn-primary btn-view-user" data-code="${code}">
+          <span>👁️</span> رسیدها
+        </button>
+        <button class="btn btn-danger btn-delete-user" data-code="${code}">
+          <span>🗑️</span> حذف
+        </button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  document.getElementById('usersCountText').textContent = `${toPersianDigits(String(userList.length))} کاربر`;
+
+  container.querySelectorAll('.btn-view-user').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('adminFilterUser').value = btn.dataset.code;
+      document.getElementById('adminSearchInput').value = '';
+      renderAdminGallery();
+      document.getElementById('adminGallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  container.querySelectorAll('.btn-delete-user').forEach(btn => {
+    btn.addEventListener('click', () => deleteUser(btn.dataset.code));
+  });
+}
+
+function deleteUser(code) {
+  const users = getUsers();
+  const user = users[code];
+  if (!user) return;
+
+  const receiptCount = (() => {
+    try { return JSON.parse(localStorage.getItem(`receipts_${code}`) || '[]').length; }
+    catch { return 0; }
+  })();
+
+  if (!confirm(`⚠️ حذف کاربر «${user.fullName}» و ${receiptCount} رسید مربوطه؟\n\nاین عمل قابل بازگشت نیست!`)) return;
+
+  delete users[code];
+  saveUsers(users);
+  localStorage.removeItem(`receipts_${code}`);
+
+  showToast(`🗑️ کاربر «${user.fullName}» حذف شد`);
+  renderAdminStats();
+  renderUsersList();
+  renderAdminGallery();
+  populateUserFilter();
+}
+
+function populateUserFilter() {
+  const users = getUsers();
+  const select = document.getElementById('adminFilterUser');
+  const currentVal = select.value;
+  select.innerHTML = '<option value="">همه کاربران</option>';
+  Object.keys(users).forEach(code => {
+    if (code === ADMIN_CODE) return;
+    const user = users[code];
+    const opt = document.createElement('option');
+    opt.value = code;
+    opt.textContent = `${user.fullName} (${code})`;
+    select.appendChild(opt);
+  });
+  select.value = currentVal;
+}
+
+function renderAdminGallery() {
+  let allReceipts = getAllReceipts();
+  const query = document.getElementById('adminSearchInput').value.trim().toLowerCase();
+  const filterUser = document.getElementById('adminFilterUser').value;
+
+  if (filterUser) allReceipts = allReceipts.filter(r => r.ownerCode === filterUser);
+  if (query) {
+    allReceipts = allReceipts.filter(r =>
+      (r.fullName || '').toLowerCase().includes(query) ||
+      (r.classNumber || '').toLowerCase().includes(query) ||
+      (r.description || '').toLowerCase().includes(query) ||
+      (r.ownerCode || '').toLowerCase().includes(query) ||
+      (r.ownerName || '').toLowerCase().includes(query)
+    );
+  }
+
+  const galleryEl = document.getElementById('adminGallery');
+  const empty = document.getElementById('adminEmpty');
+  galleryEl.innerHTML = '';
+
+  if (allReceipts.length === 0) {
+    empty.style.display = 'block';
+    document.getElementById('allReceiptsCount').textContent = '0 رسید';
+    document.getElementById('adminExportPdfBtn').disabled = true;
+    document.getElementById('adminDeleteAllReceiptsBtn').disabled = true;
+    return;
+  }
+
+  empty.style.display = 'none';
+  document.getElementById('allReceiptsCount').textContent = `${toPersianDigits(String(allReceipts.length))} رسید`;
+  document.getElementById('adminExportPdfBtn').disabled = false;
+  document.getElementById('adminDeleteAllReceiptsBtn').disabled = false;
+
+  allReceipts.forEach((r, idx) => {
+    const card = document.createElement('div');
+    card.className = 'receipt-card';
+    card.innerHTML = `
+      <div class="receipt-img-wrap">
+        <span class="receipt-number">#${toPersianDigits(String(idx + 1))}</span>
+        <div class="receipt-actions">
+          <button class="icon-btn view" data-action="view" data-id="${r.id}" data-owner="${r.ownerCode}" title="مشاهده">👁️</button>
+          <button class="icon-btn delete" data-action="delete" data-id="${r.id}" data-owner="${r.ownerCode}" title="حذف">🗑️</button>
+        </div>
+        <img src="${r.image}" alt="رسید" loading="lazy">
+      </div>
+      <div class="receipt-info">
+        <div class="receipt-name">
+          <span class="badge-user">${escapeHtml(r.ownerName)}</span>
+          ${escapeHtml(r.fullName)}
+        </div>
+        <div class="receipt-meta">
+          <span>🎓 کلاس ${escapeHtml(r.classNumber)}</span>
+          <span>📅 ${formatDate(r.date)}</span>
+          ${r.description ? `<span>📝 ${escapeHtml(r.description)}</span>` : ''}
+        </div>
+        ${r.amount ? `<div class="receipt-amount">💰 ${r.amount.toLocaleString('fa-IR')} تومان</div>` : ''}
+      </div>
+    `;
+    galleryEl.appendChild(card);
+  });
+
+  galleryEl.querySelectorAll('[data-action="view"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openAdminViewModal(btn.dataset.owner, btn.dataset.id);
+    });
+  });
+  galleryEl.querySelectorAll('[data-action="delete"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      deleteAdminReceipt(btn.dataset.owner, btn.dataset.id);
+    });
+  });
+  galleryEl.querySelectorAll('.receipt-img-wrap').forEach((el, idx) => {
+    el.addEventListener('click', () => {
+      const r = allReceipts[idx];
+      openAdminViewModal(r.ownerCode, r.id);
+    });
+  });
+}
+
+function openAdminViewModal(ownerCode, receiptId) {
+  try {
+    const userReceipts = JSON.parse(localStorage.getItem(`receipts_${ownerCode}`) || '[]');
+    const r = userReceipts.find(x => String(x.id) === String(receiptId));
+    if (!r) return;
+
+    const users = getUsers();
+    const owner = users[ownerCode];
+
+    document.getElementById('modalImage').src = r.image;
+    document.getElementById('modalDetails').innerHTML = `
+      <div class="detail-row full">
+        <div class="detail-label">👤 صاحب حساب (ثبت‌کننده)</div>
+        <div class="detail-value">${escapeHtml(owner?.fullName || 'نامشخص')} - ${toPersianDigits(escapeHtml(ownerCode))}</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">👤 نام روی رسید</div>
+        <div class="detail-value">${escapeHtml(r.fullName)}</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">🎓 شماره کلاس</div>
+        <div class="detail-value">${escapeHtml(r.classNumber)}</div>
+      </div>
+      ${r.amount ? `<div class="detail-row"><div class="detail-label">💰 مبلغ</div><div class="detail-value amount">${r.amount.toLocaleString('fa-IR')} تومان</div></div>` : ''}
+      <div class="detail-row">
+        <div class="detail-label">📅 تاریخ ثبت</div>
+        <div class="detail-value">${formatDate(r.date)}</div>
+      </div>
+      ${r.description ? `<div class="detail-row full"><div class="detail-label">📝 توضیحات</div><div class="detail-value">${escapeHtml(r.description)}</div></div>` : ''}
+    `;
+    document.getElementById('viewModal').classList.add('show');
+  } catch (e) {
+    showToast('❌ خطا در نمایش رسید', 'error');
+  }
+}
+
+function deleteAdminReceipt(ownerCode, receiptId) {
+  if (!confirm('این رسید حذف شود؟')) return;
+  try {
+    let userReceipts = JSON.parse(localStorage.getItem(`receipts_${ownerCode}`) || '[]');
+    userReceipts = userReceipts.filter(r => String(r.id) !== String(receiptId));
+    localStorage.setItem(`receipts_${ownerCode}`, JSON.stringify(userReceipts));
+    showToast('🗑️ رسید حذف شد');
+    renderAdminStats();
+    renderUsersList();
+    renderAdminGallery();
+  } catch (e) {
+    showToast('❌ خطا در حذف رسید', 'error');
+  }
+}
+
+/* ==================== رویدادهای ادمین ==================== */
+document.getElementById('adminSearchInput').addEventListener('input', renderAdminGallery);
+document.getElementById('adminFilterUser').addEventListener('change', renderAdminGallery);
+
+document.getElementById('adminExportPdfBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('adminExportPdfBtn');
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳</span> در حال ساخت...';
+  try {
+    const pdf = await buildAdminPdf();
+    pdf.save(`همه-رسیدها-${Date.now()}.pdf`);
+    showToast('📄 PDF کامل دانلود شد');
+  } catch (err) {
+    console.error(err);
+    showToast('❌ خطا در ساخت PDF', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+});
+
+document.getElementById('adminDeleteAllReceiptsBtn').addEventListener('click', () => {
+  const filterUser = document.getElementById('adminFilterUser').value;
+  const msg = filterUser
+    ? 'همه رسیدهای این کاربر حذف شوند؟'
+    : 'همه رسیدهای همه کاربران حذف شوند؟ این عمل قابل بازگشت نیست!';
+  if (!confirm(msg)) return;
+
+  if (filterUser) {
+    localStorage.removeItem(`receipts_${filterUser}`);
+  } else {
+    const users = getUsers();
+    Object.keys(users).forEach(code => {
+      if (code !== ADMIN_CODE) localStorage.removeItem(`receipts_${code}`);
+    });
+  }
+
+  showToast('✨ همه رسیدها پاک شدند');
+  renderAdminStats();
+  renderUsersList();
+  renderAdminGallery();
+});
+
+document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+  if (!confirm('از پنل ادمین خارج می‌شوید؟')) return;
+  setCurrentUser(null);
+  showAuth();
+  showToast('👋 خارج شدی');
+});
+
+document.getElementById('adminThemeToggle').addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  localStorage.setItem('theme', next);
+});
+
 /* ==================== راه‌اندازی ==================== */
-function initApp() {
+async function initApp() {
+  await ensureAdminExists();
+
   currentUser = getCurrentUser();
   if (!currentUser) { showAuth(); return; }
 
@@ -1990,8 +2943,15 @@ function initApp() {
   const user = users[currentUser];
   if (!user) { setCurrentUser(null); showAuth(); return; }
 
-  userNameDisplay.textContent = user.username;
-  userAvatar.textContent = user.username.charAt(0).toUpperCase();
+  if (isAdmin()) {
+    showAdminPanel();
+    return;
+  }
+
+  const displayName = user.fullName || user.nationalCode || currentUser;
+  userNameDisplay.textContent = displayName;
+  const avatarChar = (user.fullName ? user.fullName.trim().charAt(0) : currentUser.charAt(0));
+  userAvatar.textContent = avatarChar;
 
   loadUserData();
   showApp();
@@ -1999,7 +2959,6 @@ function initApp() {
   renderPendingPreviews();
 }
 
-// اطمینان از لود فونت‌ها قبل از استفاده در Canvas
 if (document.fonts && document.fonts.ready) {
   document.fonts.ready.then(() => console.log('✅ فونت‌ها آماده هستند'));
 }
