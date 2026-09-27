@@ -139,57 +139,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ==================== استایل لوگو ==================== */
-  .logo-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 22px;
-  }
-
-  .logo-img {
-    width: 110px;
-    height: 110px;
-    object-fit: contain;
-    border-radius: 50%;
-    padding: 6px;
-    background: var(--glass-bg);
-    border: 2.5px solid var(--glass-border);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255,255,255,0.3);
-    transition: all 0.4s ease;
-  }
-
-  .logo-img:hover {
-    transform: scale(1.05) rotate(-3deg);
-    box-shadow: 0 12px 35px rgba(212, 175, 55, 0.55);
-    border-color: var(--accent);
-  }
-
-  .header-logo {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    border-radius: 50%;
-    padding: 4px;
-    background: var(--glass-bg);
-    border: 2px solid var(--glass-border);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-  }
-
-  .header-logo:hover {
-    transform: scale(1.08);
-    border-color: var(--accent);
-    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
-  }
-
-  .header-title-wrap {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
   /* ==================== صفحه رمز ورود ==================== */
   .auth-screen {
     min-height: 100vh;
@@ -208,8 +157,8 @@
     border: 1.5px solid var(--glass-border);
     border-radius: 28px;
     box-shadow: 0 15px 50px var(--glass-shadow), 0 0 40px rgba(212, 175, 55, 0.15);
-    padding: 40px 35px;
-    max-width: 420px;
+    padding: 45px 35px;
+    max-width: 400px;
     width: 100%;
     animation: slideUp 0.6s ease;
     position: relative;
@@ -223,6 +172,19 @@
     top: 0; left: 0; right: 0;
     height: 4px;
     background: var(--gold-gradient);
+  }
+
+  .auth-logo-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 15px rgba(212, 175, 55, 0.5));
+    animation: bounce 3s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 
   .auth-title {
@@ -988,9 +950,6 @@
     .auth-card { padding: 35px 25px; }
     .header { flex-direction: column; align-items: stretch; }
     .header-actions { justify-content: center; }
-    .logo-img { width: 90px; height: 90px; }
-    .header-logo { width: 42px; height: 42px; }
-    .header-title-wrap { flex-direction: column; text-align: center; gap: 10px; }
   }
 
   ::-webkit-scrollbar { width: 10px; }
@@ -1007,9 +966,7 @@
 <div class="page active" id="authPage">
   <div class="auth-screen">
     <div class="auth-card">
-      <div class="logo-wrap">
-        <img id="loginLogo" alt="لوگو" class="logo-img" src="logo.jpg">
-      </div>
+      <span class="auth-logo-icon">🔐</span>
       <h1 class="auth-title">ورود به سیستم</h1>
       <p class="auth-subtitle">برای ادامه رمز عبور را وارد کنید</p>
 
@@ -1041,12 +998,9 @@
   <div class="container">
     <div class="glass-card">
       <div class="header">
-        <div class="header-title-wrap">
-          <img id="headerLogo" alt="لوگو" class="header-logo" src="logo.jpg">
-          <div>
-            <h1 class="title">سیستم ثبت رسید مالی</h1>
-            <p class="subtitle">رسیدها را ثبت، مدیریت و به PDF تبدیل کن</p>
-          </div>
+        <div>
+          <h1 class="title">🧾 سیستم ثبت رسید مالی</h1>
+          <p class="subtitle">رسیدها را ثبت، مدیریت و به PDF تبدیل کن</p>
         </div>
         <div class="header-right">
           <div class="header-actions">
@@ -1178,14 +1132,6 @@
 <script>
 /* ==================== رمز عبور ==================== */
 const CORRECT_PASSWORD = '1234';
-
-/* ==================== لوگو ==================== */
-// 🎯 راه ۱: از فایل logo.jpg (پیش‌فرض) — فایل رو کنار index.html بذار
-// 🎯 راه ۲: اگه می‌خوای Base64 باشه، خط زیر رو با محتوای base64 پر کن
-const LOGO_BASE64 = ""; // ← مثلاً: "data:image/jpeg;base64,/9j/4AAQ..."
-
-// مسیر لوگو (اگه Base64 پر باشه، از اون استفاده می‌کنه)
-const LOGO_SRC = LOGO_BASE64 || 'logo.jpg';
 
 /* ==================== تم ==================== */
 const html = document.documentElement;
@@ -1670,46 +1616,25 @@ function drawTableRow(ctx, opts) {
   ctx.fillText(value, tableX + (colSplit - tableX) / 2, labelY);
 }
 
-/* ==================== بارگذاری لوگو برای PDF ==================== */
-let cachedLogoImage = null;
-
-function loadLogoImage() {
-  return new Promise((resolve) => {
-    if (cachedLogoImage) return resolve(cachedLogoImage);
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      cachedLogoImage = img;
-      resolve(img);
-    };
-    img.onerror = () => {
-      console.warn('لوگو لود نشد');
-      resolve(null);
-    };
-    img.src = LOGO_SRC;
-  });
-}
-
 /* ==================== هدر PDF ==================== */
 async function createHeaderImage(receipt, number, total) {
   const W = 1400;
-  const H = 560;
+  const H = 470;
   const canvas = document.createElement('canvas');
   canvas.width = W;
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  // پس‌زمینه کرم روشن
+  // پس‌زمینه
   ctx.fillStyle = '#faf8f3';
   ctx.fillRect(0, 0, W, H);
 
-  // گرادیان طلایی
   const gradient = ctx.createLinearGradient(0, 0, W, H);
   gradient.addColorStop(0, '#d4af37');
   gradient.addColorStop(0.5, '#f5d97a');
   gradient.addColorStop(1, '#c9a227');
 
-  // قاب بیرونی طلایی
+  // قاب بیرونی
   ctx.strokeStyle = gradient;
   ctx.lineWidth = 4;
   ctx.strokeRect(15, 15, W - 30, H - 30);
@@ -1728,59 +1653,36 @@ async function createHeaderImage(receipt, number, total) {
   ctx.beginPath(); ctx.moveTo(W - 25, H - 25 - cs); ctx.lineTo(W - 25, H - 25); ctx.lineTo(W - 25 - cs, H - 25); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(25, H - 25 - cs); ctx.lineTo(25, H - 25); ctx.lineTo(25 + cs, H - 25); ctx.stroke();
 
-  // ==================== لوگو در بالای هدر ====================
-  const logoImg = await loadLogoImage();
-  const logoSize = 85;
-  const logoY = 45;
-  const logoCenterX = W / 2;
-  const logoCenterY = logoY + logoSize / 2;
-
-  if (logoImg) {
-    // دایره طلایی پشت لوگو
-    ctx.beginPath();
-    ctx.arc(logoCenterX, logoCenterY, logoSize / 2 + 8, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(212, 175, 55, 0.15)';
-    ctx.fill();
-
-    // قاب طلایی دور لوگو
-    ctx.strokeStyle = gradient;
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.arc(logoCenterX, logoCenterY, logoSize / 2 + 8, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // رسم لوگو با کلیپ دایره‌ای
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(logoCenterX, logoCenterY, logoSize / 2, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.drawImage(logoImg, logoCenterX - logoSize / 2, logoY, logoSize, logoSize);
-    ctx.restore();
-  }
-
-  // عنوان "رسید مالی" زیر لوگو
-  ctx.font = 'bold 32px Vazirmatn, Tahoma, Arial';
+  // ==================== عنوان هدر ====================
+  ctx.font = 'bold 42px Vazirmatn, Tahoma, Arial';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
   ctx.direction = 'rtl';
   ctx.fillStyle = '#8a6d0e';
-  ctx.fillText('✦ رسید مالی ✦', W / 2, logoY + logoSize + 15);
+  ctx.fillText('✦ رسید مالی ✦', W / 2, 55);
+
+  // خط جداکننده زیر عنوان
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(W / 2 - 180, 115);
+  ctx.lineTo(W / 2 + 180, 115);
+  ctx.stroke();
 
   // شماره رسید
   ctx.fillStyle = '#1c1814';
-  ctx.font = 'bold 26px Vazirmatn, Tahoma, Arial';
+  ctx.font = 'bold 28px Vazirmatn, Tahoma, Arial';
   ctx.textAlign = 'right';
   ctx.direction = 'rtl';
-  ctx.fillText(`رسید شماره ${toPersianDigits(String(number))}`, W - 55, logoY + logoSize + 20);
+  ctx.fillText(`رسید شماره ${toPersianDigits(String(number))}`, W - 55, 140);
 
   // ==================== جدول ====================
   const tableX = 55;
   const tableW = W - 110;
-  const tableY = 235;
+  const tableY = 190;
   const rowH = 45;
   const colSplit = tableX + tableW * 0.35;
 
-  // خطوط افقی جدول (4 ردیف = 5 خط)
   ctx.strokeStyle = 'rgba(201, 162, 39, 0.4)';
   ctx.lineWidth = 1;
   for (let i = 0; i <= 4; i++) {
@@ -1790,13 +1692,11 @@ async function createHeaderImage(receipt, number, total) {
     ctx.stroke();
   }
 
-  // خط عمودی وسط
   ctx.beginPath();
   ctx.moveTo(colSplit, tableY);
   ctx.lineTo(colSplit, tableY + 4 * rowH);
   ctx.stroke();
 
-  // ردیف ۱: نام
   drawTableRow(ctx, {
     label: 'نام',
     value: receipt.firstName || '—',
@@ -1805,7 +1705,6 @@ async function createHeaderImage(receipt, number, total) {
     valueColor: '#1c1814', valueSize: 22
   });
 
-  // ردیف ۲: نام خانوادگی
   drawTableRow(ctx, {
     label: 'نام خانوادگی',
     value: receipt.lastName || '—',
@@ -1814,7 +1713,6 @@ async function createHeaderImage(receipt, number, total) {
     valueColor: '#1c1814', valueSize: 22
   });
 
-  // ردیف ۳: شماره کلاس
   drawTableRow(ctx, {
     label: 'شماره کلاس',
     value: receipt.classNumber || '—',
@@ -1823,7 +1721,6 @@ async function createHeaderImage(receipt, number, total) {
     valueColor: '#8a6d0e', valueSize: 26, bold: true
   });
 
-  // ردیف ۴: تاریخ ثبت
   drawTableRow(ctx, {
     label: 'تاریخ ثبت',
     value: formatDateForPdf(receipt.date),
@@ -1852,7 +1749,6 @@ async function createHeaderImage(receipt, number, total) {
     roundRect(ctx, tableX, chartY, tableW, chartH, 12);
     ctx.stroke();
 
-    // آیکون سکه
     ctx.font = 'bold 50px Vazirmatn, Tahoma, Arial';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
@@ -1860,7 +1756,6 @@ async function createHeaderImage(receipt, number, total) {
     ctx.fillStyle = '#c9a227';
     ctx.fillText('💰', tableX + tableW - chartPadding - 10, chartY + chartH / 2);
 
-    // عنوان "مبلغ کل"
     ctx.fillStyle = '#6b5d3e';
     ctx.font = 'bold 20px Vazirmatn, Tahoma, Arial';
     ctx.textAlign = 'right';
@@ -1932,7 +1827,6 @@ async function createHeaderImage(receipt, number, total) {
     ctx.fillText('💸 مبلغی ثبت نشده است', tableX + tableW / 2, chartY + chartH / 2);
   }
 
-  // توضیحات
   if (receipt.description) {
     ctx.fillStyle = '#6b5d3e';
     ctx.font = '16px Vazirmatn, Tahoma, Arial';
@@ -2006,7 +1900,7 @@ async function buildPdf() {
     pdf.rect(7, 7, pageW - 14, pageH - 14);
 
     const headerImg = await createHeaderImage(r, i + 1, receipts.length);
-    const headerHeight = 90;
+    const headerHeight = 75;
     pdf.addImage(headerImg, 'PNG', margin, margin + 3, pageW - margin * 2, headerHeight);
 
     const imgTop = margin + 3 + headerHeight + 5;
