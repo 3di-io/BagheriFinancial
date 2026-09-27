@@ -4,15 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>سیستم ثبت رسید | Receipt Manager</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* ====== تم روشن: سفید-طلایی ====== */
     --bg-1: #faf8f3;
     --bg-2: #f5f0e3;
     --bg-3: #efe6d0;
     --glass-bg: rgba(255, 255, 255, 0.55);
-    --glass-strong: rgba(255, 255, 255, 0.75);
+    --glass-strong: rgba(255, 255, 255, 0.8);
     --glass-border: rgba(201, 162, 39, 0.35);
     --glass-shadow: rgba(160, 120, 20, 0.18);
     --text: #1c1814;
@@ -20,16 +19,12 @@
     --btn-bg: rgba(255, 255, 255, 0.6);
     --btn-hover: rgba(201, 162, 39, 0.15);
     --accent: #c9a227;
-    --accent-light: #e8c547;
-    --accent-dark: #8a6d0e;
     --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f5d97a 50%, #c9a227 100%);
     --success: #10b981;
     --danger: #dc2626;
-    --warning: #d97706;
     --receipt-bg: rgba(255, 255, 255, 0.7);
   }
 
-  /* ====== تم تیره: مشکی-طلایی ====== */
   html[data-theme="dark"],
   body[data-theme="dark"],
   [data-theme="dark"] {
@@ -37,7 +32,7 @@
     --bg-2: #131313;
     --bg-3: #1c1810;
     --glass-bg: rgba(25, 22, 15, 0.65);
-    --glass-strong: rgba(35, 30, 18, 0.85);
+    --glass-strong: rgba(35, 30, 18, 0.9);
     --glass-border: rgba(212, 175, 55, 0.3);
     --glass-shadow: rgba(0, 0, 0, 0.7);
     --text: #f5e9c8;
@@ -45,20 +40,11 @@
     --btn-bg: rgba(212, 175, 55, 0.12);
     --btn-hover: rgba(212, 175, 55, 0.28);
     --accent: #e8c547;
-    --accent-light: #f5d97a;
-    --accent-dark: #a8862a;
     --gold-gradient: linear-gradient(135deg, #8a6d0e 0%, #e8c547 50%, #a8862a 100%);
-    --success: #34d399;
-    --danger: #f87171;
-    --warning: #fbbf24;
     --receipt-bg: rgba(30, 25, 15, 0.7);
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Vazirmatn', Tahoma, sans-serif;
@@ -73,13 +59,10 @@
     transition: background 0.5s ease, color 0.3s ease;
   }
 
-  /* اجبار پس‌زمینه در حالت تیره */
-  body[data-theme="dark"],
-  [data-theme="dark"] body {
+  body[data-theme="dark"], [data-theme="dark"] body {
     background: linear-gradient(-45deg, #0a0a0a, #131313, #1c1810, #0a0a0a) !important;
     background-size: 400% 400% !important;
     color: #f5e9c8 !important;
-    animation: gradientShift 18s ease infinite !important;
   }
 
   body::before {
@@ -99,7 +82,6 @@
     100% { background-position: 0% 50%; }
   }
 
-  /* ====== حباب‌های طلایی ====== */
   .orb {
     position: fixed;
     border-radius: 50%;
@@ -121,36 +103,26 @@
     animation: float 18s ease-in-out infinite reverse;
   }
 
-  [data-theme="dark"] .orb { opacity: 0.25; }
-
   @keyframes float {
     0%, 100% { transform: translate(0, 0) scale(1); }
     50% { transform: translate(40px, 50px) scale(1.15); }
   }
 
-  .container {
-    max-width: 1100px;
-    margin: auto;
-    position: relative;
-    z-index: 1;
-  }
+  .container { max-width: 1100px; margin: auto; position: relative; z-index: 1; }
 
-  /* ====== کارت شیشه‌ای ====== */
   .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(22px) saturate(160%);
     -webkit-backdrop-filter: blur(22px) saturate(160%);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
-    box-shadow:
-      0 8px 32px var(--glass-shadow),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     padding: 30px;
     margin-bottom: 20px;
     animation: slideUp 0.6s ease;
     position: relative;
     overflow: hidden;
-    transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+    transition: background 0.5s ease, border-color 0.5s ease;
   }
 
   .glass-card::before {
@@ -167,7 +139,180 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ====== هدر ====== */
+  /* ==================== صفحه ورود ==================== */
+  .auth-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .auth-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px) saturate(160%);
+    -webkit-backdrop-filter: blur(25px) saturate(160%);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 28px;
+    box-shadow: 0 15px 50px var(--glass-shadow), 0 0 40px rgba(212, 175, 55, 0.15);
+    padding: 40px 35px;
+    max-width: 440px;
+    width: 100%;
+    animation: slideUp 0.6s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gold-gradient);
+  }
+
+  .auth-logo { text-align: center; margin-bottom: 30px; }
+
+  .auth-logo-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 15px rgba(212, 175, 55, 0.5));
+    animation: bounce 3s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .auth-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8a6d0e 0%, #c9a227 50%, #8a6d0e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+
+  [data-theme="dark"] .auth-title {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .auth-subtitle { font-size: 0.88rem; color: var(--text-soft); font-weight: 300; }
+
+  .auth-tabs {
+    display: flex;
+    gap: 8px;
+    background: var(--btn-bg);
+    padding: 5px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    border: 1px solid var(--glass-border);
+  }
+
+  .auth-tab {
+    flex: 1;
+    padding: 11px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    color: var(--text-soft);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .auth-tab.active {
+    background: var(--gold-gradient);
+    color: #1a1408;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .auth-form { display: flex; flex-direction: column; gap: 16px; }
+  .auth-field { display: flex; flex-direction: column; gap: 6px; }
+
+  .auth-field label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-soft);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .auth-field input {
+    padding: 13px 15px;
+    border-radius: 12px;
+    border: 1.5px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .auth-field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    background: var(--glass-strong);
+  }
+
+  .auth-field input::placeholder { color: var(--text-soft); opacity: 0.5; }
+
+  .auth-submit {
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    background: var(--gold-gradient);
+    color: #1a1408;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  }
+
+  .auth-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+  }
+
+  .auth-error {
+    background: rgba(220, 38, 38, 0.15);
+    border: 1px solid rgba(220, 38, 38, 0.4);
+    color: #dc2626;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: none;
+    text-align: center;
+  }
+
+  [data-theme="dark"] .auth-error { color: #f87171; background: rgba(248, 113, 113, 0.15); }
+  .auth-error.show { display: block; }
+
+  .auth-hint {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  /* ==================== هدر ==================== */
   .header {
     display: flex;
     justify-content: space-between;
@@ -177,6 +322,36 @@
     gap: 15px;
   }
 
+  .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+  .user-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--btn-bg);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .user-badge .avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--gold-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #1a1408;
+  }
+
+  .header-actions { display: flex; gap: 8px; align-items: center; }
+
   .title {
     font-size: 1.7rem;
     font-weight: 700;
@@ -184,27 +359,19 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.25));
   }
 
   [data-theme="dark"] .title {
     background: var(--gold-gradient);
     -webkit-background-clip: text;
     background-clip: text;
-    filter: drop-shadow(0 2px 12px rgba(232, 197, 71, 0.4));
   }
 
-  .subtitle {
-    font-size: 0.9rem;
-    color: var(--text-soft);
-    margin-top: 5px;
-    font-weight: 300;
-  }
+  .subtitle { font-size: 0.9rem; color: var(--text-soft); margin-top: 5px; font-weight: 300; }
 
-  /* ====== دکمه تغییر تم ====== */
-  .theme-toggle {
-    width: 52px;
-    height: 52px;
+  .icon-toggle {
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: var(--btn-bg);
     backdrop-filter: blur(10px);
@@ -213,19 +380,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
   }
 
-  .theme-toggle:hover {
-    transform: scale(1.12) rotate(20deg);
+  .icon-toggle:hover {
+    transform: scale(1.1);
     background: var(--btn-hover);
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     border-color: var(--accent);
   }
 
-  /* ====== ناحیه آپلود ====== */
+  /* ==================== بقیه استایل‌ها ==================== */
   .capture-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -242,57 +408,25 @@
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
     transition: all 0.35s ease;
-    position: relative;
-    overflow: hidden;
   }
 
-  .capture-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15), transparent 70%);
-    opacity: 0;
-    transition: opacity 0.35s ease;
-  }
-
-  .capture-btn:hover,
-  .capture-btn.dragover {
+  .capture-btn:hover, .capture-btn.dragover {
     border-color: var(--accent);
     background: var(--btn-hover);
     transform: translateY(-4px);
     box-shadow: 0 12px 35px rgba(212, 175, 55, 0.25);
   }
 
-  .capture-btn:hover::after { opacity: 1; }
-
   .capture-icon {
     font-size: 2.5rem;
     display: block;
     margin-bottom: 10px;
-    animation: bounce 2s ease-in-out infinite;
     filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
   }
 
-  .capture-btn:hover .capture-icon { animation-duration: 0.8s; }
+  .capture-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+  .capture-hint { font-size: 0.8rem; color: var(--text-soft); }
 
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-
-  .capture-title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: var(--text);
-  }
-
-  .capture-hint {
-    font-size: 0.8rem;
-    color: var(--text-soft);
-  }
-
-  /* ====== فرم ====== */
   .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -300,11 +434,7 @@
     margin-bottom: 20px;
   }
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
 
   .form-group label {
     font-size: 0.85rem;
@@ -315,15 +445,10 @@
     gap: 5px;
   }
 
-  .form-group label .required {
-    color: var(--accent);
-    font-size: 1rem;
-    text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
-  }
+  .form-group label .required { color: var(--accent); font-size: 1rem; }
 
   .form-group input,
-  .form-group textarea,
-  .form-group select {
+  .form-group textarea {
     padding: 12px 15px;
     border-radius: 12px;
     border: 1.5px solid var(--glass-border);
@@ -337,37 +462,19 @@
   }
 
   .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
+  .form-group textarea:focus {
     border-color: var(--accent);
-    box-shadow:
-      0 0 0 3px rgba(212, 175, 55, 0.2),
-      0 0 20px rgba(212, 175, 55, 0.15);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
     background: var(--glass-strong);
   }
 
   .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: var(--text-soft);
-    opacity: 0.55;
-  }
+  .form-group textarea::placeholder { color: var(--text-soft); opacity: 0.55; }
 
-  .form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-group.full-width { grid-column: 1 / -1; }
 
-  .form-group.full-width {
-    grid-column: 1 / -1;
-  }
-
-  /* ====== دکمه‌ها ====== */
-  .actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 
   .btn {
     padding: 13px 26px;
@@ -384,8 +491,6 @@
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
   }
 
   .btn:hover:not(:disabled) {
@@ -394,8 +499,6 @@
     box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
     border-color: var(--accent);
   }
-
-  .btn:active:not(:disabled) { transform: translateY(0); }
 
   .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
@@ -407,11 +510,6 @@
     box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
   }
 
-  .btn-primary:hover:not(:disabled) {
-    box-shadow: 0 10px 35px rgba(212, 175, 55, 0.6);
-    transform: translateY(-3px);
-  }
-
   .btn-success {
     background: linear-gradient(135deg, #b8860b, #e8c547, #b8860b);
     color: #1a1408;
@@ -420,23 +518,12 @@
     box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
   }
 
-  .btn-success:hover:not(:disabled) {
-    box-shadow: 0 10px 35px rgba(212, 175, 55, 0.6);
-    transform: translateY(-3px);
-  }
-
   .btn-danger {
     background: linear-gradient(135deg, #7a1e1e, #b91c1c);
     color: #fef2f2;
     border: 1px solid rgba(212, 175, 55, 0.3);
   }
 
-  .btn-danger:hover:not(:disabled) {
-    box-shadow: 0 10px 30px rgba(185, 28, 28, 0.5);
-    transform: translateY(-3px);
-  }
-
-  /* ====== پیش‌نمایش عکس ====== */
   .selected-preview {
     margin-bottom: 20px;
     padding: 15px;
@@ -447,7 +534,6 @@
     align-items: center;
     gap: 15px;
     animation: popIn 0.3s ease;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
   }
 
   .selected-preview.show { display: flex; }
@@ -457,41 +543,21 @@
     height: 90px;
     object-fit: cover;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
     border: 2px solid var(--accent);
   }
 
   .preview-info { flex: 1; }
-
-  .preview-info h4 {
-    font-size: 0.95rem;
-    margin-bottom: 4px;
-    color: var(--text);
-  }
-
-  .preview-info p {
-    font-size: 0.8rem;
-    color: var(--text-soft);
-  }
+  .preview-info h4 { font-size: 0.95rem; margin-bottom: 4px; }
+  .preview-info p { font-size: 0.8rem; color: var(--text-soft); }
 
   @keyframes popIn {
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
   }
 
-  /* ====== جستجو ====== */
-  .search-bar {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
+  .search-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
 
-  .search-input-wrap {
-    flex: 1;
-    min-width: 200px;
-    position: relative;
-  }
+  .search-input-wrap { flex: 1; min-width: 200px; position: relative; }
 
   .search-input-wrap .icon {
     position: absolute;
@@ -521,7 +587,6 @@
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
   }
 
-  /* ====== گالری ====== */
   .section-header {
     display: flex;
     justify-content: space-between;
@@ -559,7 +624,6 @@
     border-radius: 20px;
     font-size: 0.82rem;
     color: var(--text-soft);
-    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.1);
   }
 
   .gallery {
@@ -568,16 +632,13 @@
     gap: 18px;
   }
 
-  /* ====== کارت رسید ====== */
   .receipt-card {
     background: var(--receipt-bg);
     backdrop-filter: blur(15px);
     border: 1.5px solid var(--glass-border);
     border-radius: 18px;
     overflow: hidden;
-    box-shadow:
-      0 4px 20px rgba(212, 175, 55, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.12);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     animation: popIn 0.4s ease;
     position: relative;
@@ -594,9 +655,7 @@
 
   .receipt-card:hover {
     transform: translateY(-6px);
-    box-shadow:
-      0 18px 45px rgba(212, 175, 55, 0.3),
-      0 0 0 1px var(--accent);
+    box-shadow: 0 18px 45px rgba(212, 175, 55, 0.3), 0 0 0 1px var(--accent);
     border-color: var(--accent);
   }
 
@@ -615,9 +674,7 @@
     transition: transform 0.6s ease;
   }
 
-  .receipt-card:hover .receipt-img-wrap img {
-    transform: scale(1.1);
-  }
+  .receipt-card:hover .receipt-img-wrap img { transform: scale(1.1); }
 
   .receipt-number {
     position: absolute;
@@ -644,9 +701,7 @@
     z-index: 1;
   }
 
-  .receipt-card:hover .receipt-actions {
-    opacity: 1;
-  }
+  .receipt-card:hover .receipt-actions { opacity: 1; }
 
   .icon-btn {
     width: 34px;
@@ -664,24 +719,11 @@
     transition: all 0.25s ease;
   }
 
-  .icon-btn:hover {
-    transform: scale(1.18);
-    border-color: var(--accent);
-  }
-  .icon-btn.delete:hover {
-    background: #b91c1c;
-    color: #fff;
-    box-shadow: 0 0 20px rgba(185, 28, 28, 0.6);
-  }
-  .icon-btn.view:hover {
-    background: var(--gold-gradient);
-    color: #1a1408;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-  }
+  .icon-btn:hover { transform: scale(1.18); border-color: var(--accent); }
+  .icon-btn.delete:hover { background: #b91c1c; color: #fff; }
+  .icon-btn.view:hover { background: var(--gold-gradient); color: #1a1408; }
 
-  .receipt-info {
-    padding: 15px;
-  }
+  .receipt-info { padding: 15px; }
 
   .receipt-name {
     font-size: 1rem;
@@ -690,7 +732,6 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: var(--text);
     flex-wrap: wrap;
   }
 
@@ -701,7 +742,6 @@
     border-radius: 6px;
     font-size: 0.7rem;
     font-weight: 800;
-    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
   }
 
   .receipt-meta {
@@ -712,11 +752,7 @@
     color: var(--text-soft);
   }
 
-  .receipt-meta span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .receipt-meta span { display: flex; align-items: center; gap: 6px; }
 
   .receipt-amount {
     color: #8a6d0e;
@@ -725,15 +761,10 @@
     margin-top: 8px;
     padding-top: 8px;
     border-top: 1px dashed var(--glass-border);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
   }
 
-  [data-theme="dark"] .receipt-amount {
-    color: var(--accent);
-    text-shadow: 0 0 12px rgba(232, 197, 71, 0.4);
-  }
+  [data-theme="dark"] .receipt-amount { color: var(--accent); }
 
-  /* ====== حالت خالی ====== */
   .empty-state {
     text-align: center;
     padding: 50px 20px;
@@ -747,13 +778,11 @@
     margin-bottom: 15px;
     opacity: 0.6;
     animation: bounce 3s ease-in-out infinite;
-    filter: drop-shadow(0 4px 15px rgba(212, 175, 55, 0.4));
   }
 
-  /* ====== مودال ====== */
   .modal-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    inset: 0;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
     z-index: 999;
@@ -761,24 +790,13 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    animation: fadeIn 0.3s ease;
-  }
-
-  [data-theme="light"] .modal-overlay {
-    background: rgba(60, 45, 15, 0.5);
   }
 
   .modal-overlay.show { display: flex; }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
   .modal {
     background: var(--glass-strong);
     backdrop-filter: blur(25px) saturate(180%);
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
     border: 1.5px solid var(--glass-border);
     border-radius: 24px;
     padding: 25px;
@@ -786,10 +804,7 @@
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow:
-      0 25px 70px rgba(0, 0, 0, 0.6),
-      0 0 40px rgba(212, 175, 55, 0.15);
-    animation: slideUp 0.4s ease;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
     position: relative;
   }
 
@@ -811,14 +826,11 @@
 
   .modal-header h3 {
     font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-weight: 700;
     background: linear-gradient(135deg, #8a6d0e, #c9a227, #8a6d0e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-weight: 700;
   }
 
   [data-theme="dark"] .modal-header h3 {
@@ -846,14 +858,12 @@
     background: #b91c1c;
     color: #fff;
     transform: rotate(90deg);
-    box-shadow: 0 0 20px rgba(185, 28, 28, 0.6);
   }
 
   .modal-image {
     width: 100%;
     border-radius: 16px;
     margin-bottom: 20px;
-    box-shadow: 0 8px 40px rgba(212, 175, 55, 0.25);
     max-height: 400px;
     object-fit: contain;
     background: var(--glass-strong);
@@ -871,44 +881,21 @@
     background: var(--glass-bg);
     border: 1.5px solid var(--glass-border);
     border-radius: 12px;
-    transition: all 0.3s ease;
-  }
-
-  .detail-row:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
   }
 
   .detail-row.full { grid-column: 1 / -1; }
 
-  .detail-label {
-    font-size: 0.75rem;
-    color: var(--text-soft);
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+  .detail-label { font-size: 0.75rem; color: var(--text-soft); margin-bottom: 4px; }
 
   .detail-value {
     font-size: 0.95rem;
     font-weight: 600;
     word-break: break-word;
-    color: var(--text);
   }
 
-  .detail-value.amount {
-    color: #8a6d0e;
-    font-size: 1.15rem;
-    font-weight: 800;
-    text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
-  }
+  .detail-value.amount { color: #8a6d0e; font-size: 1.15rem; font-weight: 800; }
+  [data-theme="dark"] .detail-value.amount { color: var(--accent); }
 
-  [data-theme="dark"] .detail-value.amount {
-    color: var(--accent);
-  }
-
-  /* ====== دوربین ====== */
   .camera-video {
     width: 100%;
     border-radius: 16px;
@@ -917,14 +904,9 @@
     max-height: 60vh;
     object-fit: contain;
     border: 1.5px solid var(--glass-border);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   }
 
-  .camera-controls {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-  }
+  .camera-controls { display: flex; justify-content: center; gap: 12px; }
 
   .shutter-btn {
     width: 72px;
@@ -933,26 +915,17 @@
     background: var(--gold-gradient);
     border: 4px solid var(--glass-strong);
     cursor: pointer;
-    transition: all 0.25s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.9rem;
-    box-shadow:
-      0 0 0 4px rgba(212, 175, 55, 0.3),
-      0 8px 30px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3), 0 8px 30px rgba(212, 175, 55, 0.5);
+    transition: all 0.25s ease;
   }
 
-  .shutter-btn:hover {
-    transform: scale(1.08);
-    box-shadow:
-      0 0 0 6px rgba(212, 175, 55, 0.5),
-      0 12px 40px rgba(212, 175, 55, 0.8);
-  }
-
+  .shutter-btn:hover { transform: scale(1.08); }
   .shutter-btn:active { transform: scale(0.94); }
 
-  /* ====== Toast ====== */
   .toast {
     position: fixed;
     bottom: 30px;
@@ -963,9 +936,7 @@
     border: 1.5px solid var(--glass-border);
     padding: 14px 26px;
     border-radius: 14px;
-    box-shadow:
-      0 8px 40px var(--glass-shadow),
-      0 0 30px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 8px 40px var(--glass-shadow);
     font-weight: 700;
     z-index: 1000;
     opacity: 0;
@@ -980,27 +951,26 @@
     opacity: 1;
   }
 
-  /* ====== ریسپانسیو ====== */
+  .page { display: none; }
+  .page.active { display: block; }
+
   @media (max-width: 700px) {
     body { padding: 15px 12px; }
     .glass-card { padding: 20px; border-radius: 18px; }
     .title { font-size: 1.3rem; }
     .capture-section { grid-template-columns: 1fr; }
     .gallery { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-    .receipt-info { padding: 12px; }
     .modal-details { grid-template-columns: 1fr; }
     .btn { padding: 11px 18px; font-size: 0.85rem; }
     .form-grid { grid-template-columns: 1fr; }
+    .auth-card { padding: 30px 22px; }
+    .header { flex-direction: column; align-items: stretch; }
+    .header-actions { justify-content: center; }
   }
 
   ::-webkit-scrollbar { width: 10px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb {
-    background: var(--gold-gradient);
-    border-radius: 10px;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-  }
+  ::-webkit-scrollbar-thumb { background: var(--gold-gradient); border-radius: 10px; }
 </style>
 </head>
 <body>
@@ -1008,101 +978,160 @@
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 
-<div class="container">
-  <!-- ========== کارت اصلی ========== -->
-  <div class="glass-card">
-    <div class="header">
-      <div>
-        <h1 class="title">🧾 سیستم ثبت رسید مالی</h1>
-        <p class="subtitle">رسیدها را ثبت، مدیریت و به PDF تبدیل کن</p>
+<!-- ==================== صفحه ورود / ثبت‌نام ==================== -->
+<div class="page active" id="authPage">
+  <div class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <span class="auth-logo-icon">🧾</span>
+        <h1 class="auth-title">سیستم ثبت رسید</h1>
+        <p class="auth-subtitle">برای ادامه وارد شوید یا حساب بسازید</p>
       </div>
-      <button class="theme-toggle" id="themeToggle" title="حالت تیره">🌙</button>
-    </div>
 
-    <!-- دکمه‌های دوربین و آپلود -->
-    <div class="capture-section">
-      <div class="capture-btn" id="cameraBtn">
-        <span class="capture-icon">📷</span>
-        <div class="capture-title">گرفتن عکس با دوربین</div>
-        <div class="capture-hint">از دوربین دستگاه استفاده کن</div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">ورود</button>
+        <button class="auth-tab" data-tab="register">ثبت‌نام</button>
       </div>
-      <div class="capture-btn" id="uploadBtn">
-        <span class="capture-icon">📁</span>
-        <div class="capture-title">آپلود از گالری</div>
-        <div class="capture-hint">یا عکس را اینجا رها کن</div>
-      </div>
-      <input type="file" id="fileInput" accept="image/*" multiple hidden>
-    </div>
 
-    <!-- پیش‌نمایش عکس‌ها -->
-    <div id="selectedPreviews"></div>
+      <div id="authError" class="auth-error"></div>
 
-    <!-- فرم اطلاعات -->
-    <div class="form-grid">
-      <div class="form-group">
-        <label>👤 نام <span class="required">*</span></label>
-        <input type="text" id="firstName" placeholder="مثلاً علی" required>
-      </div>
-      <div class="form-group">
-        <label>👤 نام خانوادگی <span class="required">*</span></label>
-        <input type="text" id="lastName" placeholder="مثلاً محمدی" required>
-      </div>
-      <div class="form-group">
-        <label>🎓 شماره کلاس <span class="required">*</span></label>
-        <input type="text" id="classNumber" placeholder="مثلاً ۱۰۱" required>
-      </div>
-      <div class="form-group">
-        <label>💰 مبلغ (تومان)</label>
-        <input type="number" id="amount" placeholder="مثلاً ۵۰۰۰۰۰" min="0">
-      </div>
-      <div class="form-group full-width">
-        <label>📝 توضیحات</label>
-        <textarea id="description" placeholder="توضیح اختیاری..."></textarea>
-      </div>
-    </div>
+      <form class="auth-form" id="loginForm">
+        <div class="auth-field">
+          <label>👤 نام کاربری</label>
+          <input type="text" id="loginUsername" placeholder="نام کاربری خود را وارد کنید" autocomplete="username" required>
+        </div>
+        <div class="auth-field">
+          <label>🔒 رمز عبور</label>
+          <input type="password" id="loginPassword" placeholder="رمز عبور" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="auth-submit">ورود به حساب</button>
+      </form>
 
-    <div class="actions">
-      <button class="btn btn-success" id="saveBtn" disabled>
-        <span>💾</span> ثبت رسید
-      </button>
-      <button class="btn" id="clearFormBtn">
-        <span>🔄</span> پاک کردن فرم
-      </button>
-    </div>
-  </div>
-
-  <!-- ========== کارت آرشیو ========== -->
-  <div class="glass-card">
-    <div class="section-header">
-      <h3>📚 آرشیو رسیدها</h3>
-      <div class="badge">
-        <span>📊</span> <span id="countText">0 رسید</span>
-      </div>
-    </div>
-
-    <div class="search-bar">
-      <div class="search-input-wrap">
-        <span class="icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="جستجو بر اساس نام، کلاس یا توضیحات...">
-      </div>
-      <button class="btn btn-primary" id="exportPdfBtn" disabled>
-        <span>📄</span> خروجی PDF
-      </button>
-      <button class="btn btn-danger" id="deleteAllBtn" disabled>
-        <span>🗑️</span> پاک کردن همه
-      </button>
-    </div>
-
-    <div class="gallery" id="gallery"></div>
-
-    <div class="empty-state" id="emptyState">
-      <span class="icon">📭</span>
-      هنوز رسیدی ثبت نشده
+      <form class="auth-form" id="registerForm" style="display: none;">
+        <div class="auth-field">
+          <label>👤 نام کاربری</label>
+          <input type="text" id="regUsername" placeholder="حداقل ۳ کاراکتر (فقط حروف و اعداد)" autocomplete="username" required>
+        </div>
+        <div class="auth-field">
+          <label>🔒 رمز عبور</label>
+          <input type="password" id="regPassword" placeholder="حداقل ۴ کاراکتر" autocomplete="new-password" required>
+        </div>
+        <div class="auth-field">
+          <label>🔒 تکرار رمز عبور</label>
+          <input type="password" id="regPassword2" placeholder="رمز عبور را دوباره وارد کنید" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="auth-submit">ساخت حساب جدید</button>
+        <p class="auth-hint">⚠️ داده‌ها فقط روی همین مرورگر ذخیره می‌شوند</p>
+      </form>
     </div>
   </div>
 </div>
 
-<!-- ========== مودال مشاهده ========== -->
+<!-- ==================== صفحه اصلی ==================== -->
+<div class="page" id="appPage">
+  <div class="container">
+    <div class="glass-card">
+      <div class="header">
+        <div>
+          <h1 class="title">🧾 سیستم ثبت رسید مالی</h1>
+          <p class="subtitle">رسیدها را ثبت، مدیریت و به PDF تبدیل کن</p>
+        </div>
+        <div class="header-right">
+          <div class="user-badge">
+            <span class="avatar" id="userAvatar">U</span>
+            <span id="userNameDisplay">کاربر</span>
+          </div>
+          <div class="header-actions">
+            <button class="icon-toggle" id="themeToggle" title="حالت تیره">🌙</button>
+            <button class="icon-toggle" id="logoutBtn" title="خروج از حساب">🚪</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="capture-section">
+        <div class="capture-btn" id="cameraBtn">
+          <span class="capture-icon">📷</span>
+          <div class="capture-title">گرفتن عکس با دوربین</div>
+          <div class="capture-hint">از دوربین دستگاه استفاده کن</div>
+        </div>
+        <div class="capture-btn" id="uploadBtn">
+          <span class="capture-icon">📁</span>
+          <div class="capture-title">آپلود از گالری</div>
+          <div class="capture-hint">یا عکس را اینجا رها کن</div>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+      </div>
+
+      <div id="selectedPreviews"></div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>👤 نام <span class="required">*</span></label>
+          <input type="text" id="firstName" placeholder="مثلاً علی" required>
+        </div>
+        <div class="form-group">
+          <label>👤 نام خانوادگی <span class="required">*</span></label>
+          <input type="text" id="lastName" placeholder="مثلاً محمدی" required>
+        </div>
+        <div class="form-group">
+          <label>🎓 شماره کلاس <span class="required">*</span></label>
+          <input type="text" id="classNumber" placeholder="مثلاً ۱۰۱" required>
+        </div>
+        <div class="form-group">
+          <label>💰 مبلغ (تومان)</label>
+          <input type="number" id="amount" placeholder="مثلاً ۵۰۰۰۰۰" min="0">
+        </div>
+        <div class="form-group full-width">
+          <label>📝 توضیحات</label>
+          <textarea id="description" placeholder="توضیح اختیاری..."></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-success" id="saveBtn" disabled>
+          <span>💾</span> ثبت رسید
+        </button>
+        <button class="btn" id="clearFormBtn">
+          <span>🔄</span> پاک کردن فرم
+        </button>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <div class="section-header">
+        <h3>📚 آرشیو رسیدها</h3>
+        <div class="badge">
+          <span>📊</span> <span id="countText">0 رسید</span>
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <span class="icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="جستجو بر اساس نام، کلاس یا توضیحات...">
+        </div>
+        <button class="btn btn-primary" id="exportPdfBtn" disabled>
+          <span>📄</span> خروجی PDF
+        </button>
+        <button class="btn btn-primary" id="printBtn" disabled>
+          <span>🖨️</span> چاپ
+        </button>
+        <button class="btn btn-danger" id="deleteAllBtn" disabled>
+          <span>🗑️</span> پاک کردن همه
+        </button>
+      </div>
+
+      <div class="gallery" id="gallery"></div>
+
+      <div class="empty-state" id="emptyState">
+        <span class="icon">📭</span>
+        هنوز رسیدی ثبت نشده
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- مودال مشاهده -->
 <div class="modal-overlay" id="viewModal">
   <div class="modal">
     <div class="modal-header">
@@ -1114,7 +1143,7 @@
   </div>
 </div>
 
-<!-- ========== مودال دوربین ========== -->
+<!-- مودال دوربین -->
 <div class="modal-overlay" id="cameraModal">
   <div class="modal">
     <div class="modal-header">
@@ -1133,16 +1162,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-/* ==================== مدیریت تم ==================== */
+/* ==================== تم ==================== */
 const html = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
 
-// پاک کردن مقدار خراب localStorage
 (function cleanupTheme() {
   const saved = localStorage.getItem('theme');
-  if (saved && saved !== 'light' && saved !== 'dark') {
-    localStorage.removeItem('theme');
-  }
+  if (saved && saved !== 'light' && saved !== 'dark') localStorage.removeItem('theme');
 })();
 
 function getTheme() {
@@ -1157,10 +1183,8 @@ function applyTheme(theme) {
   themeToggle.setAttribute('title', theme === 'dark' ? 'حالت روشن' : 'حالت تیره');
 }
 
-// اعمال تم اولیه
 applyTheme(getTheme());
 
-// کلیک روی دکمه
 themeToggle.addEventListener('click', () => {
   const current = html.getAttribute('data-theme');
   const next = current === 'dark' ? 'light' : 'dark';
@@ -1168,15 +1192,154 @@ themeToggle.addEventListener('click', () => {
   localStorage.setItem('theme', next);
 });
 
+/* ==================== احراز هویت ==================== */
+function getUsers() {
+  try {
+    const raw = localStorage.getItem('app_users');
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+
+function saveUsers(users) {
+  localStorage.setItem('app_users', JSON.stringify(users));
+}
+
+async function simpleHash(text) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text + '|goldenSalt2024');
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function getCurrentUser() { return sessionStorage.getItem('current_user') || null; }
+function setCurrentUser(u) {
+  if (u) sessionStorage.setItem('current_user', u);
+  else sessionStorage.removeItem('current_user');
+}
+
+function getReceiptsKey(username) { return `receipts_${username}`; }
+
+/* ==================== صفحه‌ها ==================== */
+const authPage = document.getElementById('authPage');
+const appPage = document.getElementById('appPage');
+
+function showApp() { authPage.classList.remove('active'); appPage.classList.add('active'); }
+function showAuth() { appPage.classList.remove('active'); authPage.classList.add('active'); }
+
+/* ==================== تب‌ها ==================== */
+const tabs = document.querySelectorAll('.auth-tab');
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+const authError = document.getElementById('authError');
+
+function showError(msg) {
+  authError.textContent = msg;
+  authError.classList.add('show');
+  setTimeout(() => authError.classList.remove('show'), 4000);
+}
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    authError.classList.remove('show');
+    if (tab.dataset.tab === 'login') {
+      loginForm.style.display = 'flex';
+      registerForm.style.display = 'none';
+    } else {
+      loginForm.style.display = 'none';
+      registerForm.style.display = 'flex';
+    }
+  });
+});
+
+/* ==================== ثبت‌نام ==================== */
+registerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.getElementById('regUsername').value.trim();
+  const pass1 = document.getElementById('regPassword').value;
+  const pass2 = document.getElementById('regPassword2').value;
+
+  if (username.length < 3) return showError('نام کاربری باید حداقل ۳ کاراکتر باشد');
+  if (!/^[a-zA-Z0-9_\u0600-\u06FF]+$/.test(username)) return showError('نام کاربری فقط می‌تواند شامل حروف، اعداد و _ باشد');
+  if (pass1.length < 4) return showError('رمز عبور باید حداقل ۴ کاراکتر باشد');
+  if (pass1 !== pass2) return showError('رمزهای عبور یکسان نیستند');
+
+  const users = getUsers();
+  const key = username.toLowerCase();
+  if (users[key]) return showError('این نام کاربری قبلاً ثبت شده');
+
+  users[key] = {
+    username: username,
+    passwordHash: await simpleHash(pass1),
+    createdAt: new Date().toISOString()
+  };
+  saveUsers(users);
+
+  setCurrentUser(key);
+  registerForm.reset();
+  initApp();
+  showToast(`🎉 خوش آمدی ${username}!`);
+});
+
+/* ==================== ورود ==================== */
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.getElementById('loginUsername').value.trim().toLowerCase();
+  const password = document.getElementById('loginPassword').value;
+
+  if (!username || !password) return showError('نام کاربری و رمز عبور را وارد کنید');
+
+  const users = getUsers();
+  const user = users[username];
+  if (!user) return showError('نام کاربری یا رمز عبور اشتباه است');
+
+  const hash = await simpleHash(password);
+  if (hash !== user.passwordHash) return showError('نام کاربری یا رمز عبور اشتباه است');
+
+  setCurrentUser(username);
+  loginForm.reset();
+  initApp();
+  showToast(`👋 خوش آمدی ${user.username}!`);
+});
+
+/* ==================== خروج ==================== */
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  if (!confirm('از حساب خود خارج می‌شوید؟')) return;
+  setCurrentUser(null);
+  receipts = [];
+  pendingImages = [];
+  filteredReceipts = [];
+  clearForm();
+  renderGallery();
+  renderPendingPreviews();
+  showAuth();
+  showToast('👋 با موفقیت خارج شدی');
+});
+
 /* ==================== State ==================== */
 let receipts = [];
-try {
-  receipts = JSON.parse(localStorage.getItem('receipts') || '[]');
-  if (!Array.isArray(receipts)) receipts = [];
-} catch (e) { receipts = []; }
-
 let pendingImages = [];
-let filteredReceipts = [...receipts];
+let filteredReceipts = [];
+let currentUser = null;
+
+function loadUserData() {
+  const key = getReceiptsKey(currentUser);
+  try {
+    receipts = JSON.parse(localStorage.getItem(key) || '[]');
+    if (!Array.isArray(receipts)) receipts = [];
+  } catch { receipts = []; }
+  filteredReceipts = [...receipts];
+}
+
+function saveToStorage() {
+  try {
+    localStorage.setItem(getReceiptsKey(currentUser), JSON.stringify(receipts));
+  } catch (e) {
+    showToast('⚠️ حافظه پر است. برخی رسیدهای قدیمی را حذف کن.', 'error');
+  }
+}
 
 /* ==================== DOM ==================== */
 const fileInput = document.getElementById('fileInput');
@@ -1189,9 +1352,12 @@ const countText = document.getElementById('countText');
 const saveBtn = document.getElementById('saveBtn');
 const clearFormBtn = document.getElementById('clearFormBtn');
 const exportPdfBtn = document.getElementById('exportPdfBtn');
+const printBtn = document.getElementById('printBtn');
 const deleteAllBtn = document.getElementById('deleteAllBtn');
 const searchInput = document.getElementById('searchInput');
 const toast = document.getElementById('toast');
+const userNameDisplay = document.getElementById('userNameDisplay');
+const userAvatar = document.getElementById('userAvatar');
 
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
@@ -1201,18 +1367,13 @@ const description = document.getElementById('description');
 
 /* ==================== آپلود ==================== */
 uploadBtn.addEventListener('click', () => fileInput.click());
-
-uploadBtn.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  uploadBtn.classList.add('dragover');
-});
+uploadBtn.addEventListener('dragover', (e) => { e.preventDefault(); uploadBtn.classList.add('dragover'); });
 uploadBtn.addEventListener('dragleave', () => uploadBtn.classList.remove('dragover'));
 uploadBtn.addEventListener('drop', (e) => {
   e.preventDefault();
   uploadBtn.classList.remove('dragover');
   handleFiles(e.dataTransfer.files);
 });
-
 fileInput.addEventListener('change', (e) => {
   handleFiles(e.target.files);
   fileInput.value = '';
@@ -1221,15 +1382,10 @@ fileInput.addEventListener('change', (e) => {
 function handleFiles(files) {
   const valid = Array.from(files).filter(f => f.type.startsWith('image/'));
   if (!valid.length) return showToast('❌ فقط فایل تصویری مجاز است', 'error');
-
   valid.forEach(file => {
     const reader = new FileReader();
     reader.onload = (ev) => {
-      pendingImages.push({
-        id: Date.now() + Math.random(),
-        data: ev.target.result,
-        name: file.name
-      });
+      pendingImages.push({ id: Date.now() + Math.random(), data: ev.target.result, name: file.name });
       renderPendingPreviews();
     };
     reader.readAsDataURL(file);
@@ -1259,36 +1415,26 @@ cameraBtn.addEventListener('click', async () => {
 });
 
 shutterBtn.addEventListener('click', () => {
-  const w = cameraVideo.videoWidth;
-  const h = cameraVideo.videoHeight;
+  const w = cameraVideo.videoWidth, h = cameraVideo.videoHeight;
   if (!w || !h) return;
   cameraCanvas.width = w;
   cameraCanvas.height = h;
-  const ctx = cameraCanvas.getContext('2d');
-  ctx.drawImage(cameraVideo, 0, 0, w, h);
-  const dataUrl = cameraCanvas.toDataURL('image/jpeg', 0.9);
-  pendingImages.push({ id: Date.now() + Math.random(), data: dataUrl, name: 'camera.jpg' });
+  cameraCanvas.getContext('2d').drawImage(cameraVideo, 0, 0, w, h);
+  pendingImages.push({ id: Date.now() + Math.random(), data: cameraCanvas.toDataURL('image/jpeg', 0.9), name: 'camera.jpg' });
   renderPendingPreviews();
   showToast('📸 عکس گرفته شد');
   closeCamera();
 });
 
 function closeCamera() {
-  if (cameraStream) {
-    cameraStream.getTracks().forEach(t => t.stop());
-    cameraStream = null;
-  }
+  if (cameraStream) { cameraStream.getTracks().forEach(t => t.stop()); cameraStream = null; }
   cameraModal.classList.remove('show');
 }
 
 /* ==================== پیش‌نمایش ==================== */
 function renderPendingPreviews() {
   selectedPreviews.innerHTML = '';
-  if (pendingImages.length === 0) {
-    saveBtn.disabled = true;
-    return;
-  }
-
+  if (pendingImages.length === 0) { saveBtn.disabled = true; return; }
   pendingImages.forEach((img) => {
     const div = document.createElement('div');
     div.className = 'selected-preview show';
@@ -1306,7 +1452,6 @@ function renderPendingPreviews() {
     });
     selectedPreviews.appendChild(div);
   });
-
   saveBtn.disabled = false;
 }
 
@@ -1315,16 +1460,8 @@ saveBtn.addEventListener('click', () => {
   const fn = firstName.value.trim();
   const ln = lastName.value.trim();
   const cn = classNumber.value.trim();
-
-  if (!fn || !ln || !cn) {
-    showToast('❌ نام، نام خانوادگی و شماره کلاس الزامی است', 'error');
-    return;
-  }
-
-  if (pendingImages.length === 0) {
-    showToast('❌ حداقل یک عکس رسید انتخاب کن', 'error');
-    return;
-  }
+  if (!fn || !ln || !cn) return showToast('❌ نام، نام خانوادگی و شماره کلاس الزامی است', 'error');
+  if (pendingImages.length === 0) return showToast('❌ حداقل یک عکس رسید انتخاب کن', 'error');
 
   const newReceipts = pendingImages.map(img => ({
     id: Date.now() + Math.random(),
@@ -1335,16 +1472,16 @@ saveBtn.addEventListener('click', () => {
     classNumber: cn,
     amount: amount.value ? Number(amount.value) : null,
     description: description.value.trim(),
-    date: new Date().toISOString()
+    date: new Date().toISOString(),
+    owner: currentUser
   }));
 
   receipts = [...newReceipts, ...receipts];
   saveToStorage();
   filteredReceipts = [...receipts];
   renderGallery();
-
   clearForm();
-  showToast(`✅ ${newReceipts.length} رسید با موفقیت ثبت شد`);
+  showToast(`✅ ${newReceipts.length} رسید ثبت شد`);
 });
 
 function clearForm() {
@@ -1358,34 +1495,19 @@ function clearForm() {
   saveBtn.disabled = true;
 }
 
-clearFormBtn.addEventListener('click', () => {
-  clearForm();
-  showToast('🔄 فرم پاک شد');
-});
+clearFormBtn.addEventListener('click', () => { clearForm(); showToast('🔄 فرم پاک شد'); });
 
-/* ==================== ذخیره‌سازی ==================== */
-function saveToStorage() {
-  try {
-    localStorage.setItem('receipts', JSON.stringify(receipts));
-  } catch (e) {
-    showToast('⚠️ حافظه پر است. برخی رسیدهای قدیمی را حذف کن.', 'error');
-  }
-}
-
-/* ==================== رندر گالری ==================== */
+/* ==================== گالری ==================== */
 function renderGallery() {
   const query = searchInput.value.trim().toLowerCase();
   filteredReceipts = receipts.filter(r => {
     if (!query) return true;
-    return (
-      (r.fullName || '').toLowerCase().includes(query) ||
-      (r.classNumber || '').toLowerCase().includes(query) ||
-      (r.description || '').toLowerCase().includes(query)
-    );
+    return (r.fullName || '').toLowerCase().includes(query)
+      || (r.classNumber || '').toLowerCase().includes(query)
+      || (r.description || '').toLowerCase().includes(query);
   });
 
   gallery.innerHTML = '';
-
   filteredReceipts.forEach((r) => {
     const card = document.createElement('div');
     card.className = 'receipt-card';
@@ -1414,16 +1536,10 @@ function renderGallery() {
   });
 
   gallery.querySelectorAll('[data-action="view"]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openViewModal(btn.dataset.id);
-    });
+    btn.addEventListener('click', (e) => { e.stopPropagation(); openViewModal(btn.dataset.id); });
   });
   gallery.querySelectorAll('[data-action="delete"]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      deleteReceipt(btn.dataset.id);
-    });
+    btn.addEventListener('click', (e) => { e.stopPropagation(); deleteReceipt(btn.dataset.id); });
   });
   gallery.querySelectorAll('.receipt-img-wrap').forEach((el, idx) => {
     el.addEventListener('click', () => openViewModal(filteredReceipts[idx].id));
@@ -1433,13 +1549,12 @@ function renderGallery() {
   const isEmpty = receipts.length === 0;
   emptyState.style.display = isEmpty ? 'block' : 'none';
   exportPdfBtn.disabled = isEmpty;
+  printBtn.disabled = isEmpty;
   deleteAllBtn.disabled = isEmpty;
 }
 
 function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, c => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  }[c]));
+  return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
 function formatDate(iso) {
@@ -1447,9 +1562,7 @@ function formatDate(iso) {
   try {
     return d.toLocaleDateString('fa-IR', { year: 'numeric', month: 'short', day: 'numeric' })
       + ' - ' + d.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' });
-  } catch {
-    return d.toLocaleString();
-  }
+  } catch { return d.toLocaleString(); }
 }
 
 /* ==================== حذف ==================== */
@@ -1471,10 +1584,9 @@ deleteAllBtn.addEventListener('click', () => {
   }
 });
 
-/* ==================== جستجو ==================== */
 searchInput.addEventListener('input', renderGallery);
 
-/* ==================== مودال مشاهده ==================== */
+/* ==================== مودال ==================== */
 const viewModal = document.getElementById('viewModal');
 const modalImage = document.getElementById('modalImage');
 const modalDetails = document.getElementById('modalDetails');
@@ -1482,7 +1594,6 @@ const modalDetails = document.getElementById('modalDetails');
 function openViewModal(id) {
   const r = receipts.find(x => String(x.id) === String(id));
   if (!r) return;
-
   modalImage.src = r.image;
   modalDetails.innerHTML = `
     <div class="detail-row">
@@ -1493,113 +1604,326 @@ function openViewModal(id) {
       <div class="detail-label">🎓 شماره کلاس</div>
       <div class="detail-value">${escapeHtml(r.classNumber)}</div>
     </div>
-    ${r.amount ? `
-    <div class="detail-row">
-      <div class="detail-label">💰 مبلغ</div>
-      <div class="detail-value amount">${r.amount.toLocaleString('fa-IR')} تومان</div>
-    </div>` : ''}
+    ${r.amount ? `<div class="detail-row"><div class="detail-label">💰 مبلغ</div><div class="detail-value amount">${r.amount.toLocaleString('fa-IR')} تومان</div></div>` : ''}
     <div class="detail-row">
       <div class="detail-label">📅 تاریخ ثبت</div>
       <div class="detail-value">${formatDate(r.date)}</div>
     </div>
-    ${r.description ? `
-    <div class="detail-row full">
-      <div class="detail-label">📝 توضیحات</div>
-      <div class="detail-value">${escapeHtml(r.description)}</div>
-    </div>` : ''}
+    ${r.description ? `<div class="detail-row full"><div class="detail-label">📝 توضیحات</div><div class="detail-value">${escapeHtml(r.description)}</div></div>` : ''}
   `;
   viewModal.classList.add('show');
 }
 
-function closeModal(id) {
-  document.getElementById(id).classList.remove('show');
-}
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 
-viewModal.addEventListener('click', (e) => {
-  if (e.target === viewModal) closeModal('viewModal');
-});
-cameraModal.addEventListener('click', (e) => {
-  if (e.target === cameraModal) closeCamera();
-});
+viewModal.addEventListener('click', (e) => { if (e.target === viewModal) closeModal('viewModal'); });
+cameraModal.addEventListener('click', (e) => { if (e.target === cameraModal) closeCamera(); });
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeModal('viewModal');
-    closeCamera();
-  }
+  if (e.key === 'Escape') { closeModal('viewModal'); closeCamera(); }
 });
+
+/* ==================== توابع کمکی فارسی ==================== */
+function toPersianDigits(str) {
+  const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+  return String(str).replace(/\d/g, d => persianDigits[d]);
+}
+
+function formatDateForPdf(iso) {
+  const d = new Date(iso);
+  try {
+    const date = d.toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' });
+    const time = d.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' });
+    return `${date} - ساعت ${time}`;
+  } catch { return d.toLocaleString(); }
+}
+
+/* ==================== ساخت هدر لوکس PDF ==================== */
+async function createHeaderImage(receipt, number, total, username) {
+  const W = 1400;
+  const H = 340;
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // ===== پس‌زمینه کرم روشن =====
+  ctx.fillStyle = '#faf8f3';
+  ctx.fillRect(0, 0, W, H);
+
+  // ===== قاب تزئینی دوتایی طلایی =====
+  const gradient = ctx.createLinearGradient(0, 0, W, H);
+  gradient.addColorStop(0, '#d4af37');
+  gradient.addColorStop(0.5, '#f5d97a');
+  gradient.addColorStop(1, '#c9a227');
+
+  // قاب بیرونی
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 4;
+  ctx.strokeRect(15, 15, W - 30, H - 30);
+
+  // قاب درونی نازک
+  ctx.strokeStyle = 'rgba(201, 162, 39, 0.5)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(24, 24, W - 48, H - 48);
+
+  // گوشه‌های تزئینی (4 گوشه)
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 4;
+  const cornerSize = 35;
+  // بالا راست
+  ctx.beginPath(); ctx.moveTo(W - 25, 25 + cornerSize); ctx.lineTo(W - 25, 25); ctx.lineTo(W - 25 - cornerSize, 25); ctx.stroke();
+  // بالا چپ
+  ctx.beginPath(); ctx.moveTo(25, 25 + cornerSize); ctx.lineTo(25, 25); ctx.lineTo(25 + cornerSize, 25); ctx.stroke();
+  // پایین راست
+  ctx.beginPath(); ctx.moveTo(W - 25, H - 25 - cornerSize); ctx.lineTo(W - 25, H - 25); ctx.lineTo(W - 25 - cornerSize, H - 25); ctx.stroke();
+  // پایین چپ
+  ctx.beginPath(); ctx.moveTo(25, H - 25 - cornerSize); ctx.lineTo(25, H - 25); ctx.lineTo(25 + cornerSize, H - 25); ctx.stroke();
+
+  // ===== لوگو تزئینی بالا وسط =====
+  ctx.font = 'bold 42px Vazirmatn, Tahoma, Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.direction = 'rtl';
+  ctx.fillStyle = '#8a6d0e';
+  ctx.fillText('✦ رسید مالی ✦', W / 2, 45);
+
+  // ===== خط جداکننده طلایی زیر لوگو =====
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(W / 2 - 150, 105);
+  ctx.lineTo(W / 2 + 150, 105);
+  ctx.stroke();
+
+  // ===== عنوان "رسید شماره X" =====
+  ctx.fillStyle = '#1c1814';
+  ctx.font = 'bold 32px Vazirmatn, Tahoma, Arial';
+  ctx.textAlign = 'right';
+  ctx.direction = 'rtl';
+  ctx.fillText(`رسید شماره ${toPersianDigits(String(number))}`, W - 60, 130);
+
+  // ===== جدول اطلاعات =====
+  const tableY = 175;
+  const tableX = 60;
+  const tableW = W - 120;
+  const rowH = 40;
+
+  // خط‌های جدول
+  ctx.strokeStyle = 'rgba(201, 162, 39, 0.4)';
+  ctx.lineWidth = 1;
+
+  // سطر اول: نام
+  ctx.beginPath(); ctx.moveTo(tableX, tableY); ctx.lineTo(tableX + tableW, tableY); ctx.stroke();
+  // سطر دوم: شماره کلاس + تاریخ
+  ctx.beginPath(); ctx.moveTo(tableX, tableY + rowH); ctx.lineTo(tableX + tableW, tableY + rowH); ctx.stroke();
+  // سطر سوم: مبلغ
+  ctx.beginPath(); ctx.moveTo(tableX, tableY + rowH * 2); ctx.lineTo(tableX + tableW, tableY + rowH * 2); ctx.stroke();
+  // خط پایین
+  ctx.beginPath(); ctx.moveTo(tableX, tableY + rowH * 3); ctx.lineTo(tableX + tableW, tableY + rowH * 3); ctx.stroke();
+
+  // خط عمودی وسط
+  ctx.beginPath(); ctx.moveTo(tableX + tableW / 2, tableY); ctx.lineTo(tableX + tableW / 2, tableY + rowH * 3); ctx.stroke();
+
+  // ===== محتوای جدول =====
+  ctx.textBaseline = 'middle';
+  ctx.direction = 'rtl';
+  ctx.font = 'bold 22px Vazirmatn, Tahoma, Arial';
+
+  // سطر 1 - راست: نام، چپ: نام خانوادگی
+  ctx.fillStyle = '#6b5d3e';
+  ctx.textAlign = 'right';
+  ctx.font = '18px Vazirmatn, Tahoma, Arial';
+  ctx.fillText('نام و نام خانوادگی', tableX + tableW - 15, tableY + rowH / 2);
+  
+  ctx.fillStyle = '#1c1814';
+  ctx.font = 'bold 24px Vazirmatn, Tahoma, Arial';
+  ctx.fillText(receipt.fullName, tableX + tableW / 2 - 15, tableY + rowH / 2);
+
+  // سطر 2 - راست: شماره کلاس، چپ: تاریخ
+  ctx.fillStyle = '#6b5d3e';
+  ctx.textAlign = 'right';
+  ctx.font = '18px Vazirmatn, Tahoma, Arial';
+  ctx.fillText('شماره کلاس', tableX + tableW - 15, tableY + rowH + rowH / 2);
+
+  ctx.fillStyle = '#8a6d0e';
+  ctx.font = 'bold 24px Vazirmatn, Tahoma, Arial';
+  ctx.fillText(receipt.classNumber, tableX + tableW / 2 - 15, tableY + rowH + rowH / 2);
+
+  // تاریخ سمت چپ
+  ctx.fillStyle = '#6b5d3e';
+  ctx.font = '18px Vazirmatn, Tahoma, Arial';
+  ctx.fillText('تاریخ ثبت', tableX + tableW / 2 + tableW / 2 - 15, tableY + rowH + rowH / 2);
+
+  ctx.fillStyle = '#1c1814';
+  ctx.font = 'bold 20px Vazirmatn, Tahoma, Arial';
+  const dateStr = formatDateForPdf(receipt.date);
+  ctx.fillText(dateStr, tableX + tableW / 2 - 15, tableY + rowH + rowH / 2);
+
+  // سطر 3 - مبلغ
+  ctx.fillStyle = '#6b5d3e';
+  ctx.font = '18px Vazirmatn, Tahoma, Arial';
+  ctx.fillText('مبلغ کل', tableX + tableW - 15, tableY + rowH * 2 + rowH / 2);
+
+  if (receipt.amount) {
+    ctx.fillStyle = '#8a6d0e';
+    ctx.font = 'bold 26px Vazirmatn, Tahoma, Arial';
+    ctx.fillText(`${toPersianDigits(receipt.amount.toLocaleString('en-US'))} تومان`, tableX + tableW / 2 - 15, tableY + rowH * 2 + rowH / 2);
+  } else {
+    ctx.fillStyle = '#999';
+    ctx.font = '20px Vazirmatn, Tahoma, Arial';
+    ctx.fillText('— ثبت نشده —', tableX + tableW / 2 - 15, tableY + rowH * 2 + rowH / 2);
+  }
+
+  // ===== توضیحات پایین =====
+  if (receipt.description) {
+    ctx.fillStyle = '#6b5d3e';
+    ctx.font = '16px Vazirmatn, Tahoma, Arial';
+    ctx.textAlign = 'right';
+    let desc = receipt.description;
+    if (desc.length > 80) desc = desc.substring(0, 80) + '...';
+    ctx.fillText(`📝 توضیحات: ${desc}`, W - 60, H - 30);
+  }
+
+  // ===== امضا =====
+  ctx.fillStyle = '#a89570';
+  ctx.font = 'italic 20px "Great Vibes", Vazirmatn, Tahoma, cursive';
+  ctx.textAlign = 'left';
+  ctx.direction = 'ltr';
+  ctx.fillText(username || 'User', 70, H - 30);
+
+  ctx.fillStyle = '#8a6d0e';
+  ctx.font = '14px Vazirmatn, Tahoma, Arial';
+  ctx.textAlign = 'left';
+  ctx.direction = 'rtl';
+  ctx.fillText('امضای دیجیتال', 70, H - 55);
+
+  return canvas.toDataURL('image/png');
+}
+
+/* ==================== ساخت فوتر ==================== */
+async function createFooterImage(current, total) {
+  const W = 500;
+  const H = 60;
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // پس‌زمینه شفاف
+  ctx.clearRect(0, 0, W, H);
+
+  // خط تزئینی
+  const gradient = ctx.createLinearGradient(0, 0, W, 0);
+  gradient.addColorStop(0, 'transparent');
+  gradient.addColorStop(0.5, '#c9a227');
+  gradient.addColorStop(1, 'transparent');
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(20, 10);
+  ctx.lineTo(W - 20, 10);
+  ctx.stroke();
+
+  // متن
+  ctx.fillStyle = '#96876a';
+  ctx.font = 'bold 18px Vazirmatn, Tahoma, Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.direction = 'rtl';
+  ctx.fillText(
+    `صفحه ${toPersianDigits(String(current))} از ${toPersianDigits(String(total))}`,
+    W / 2,
+    H / 2 + 5
+  );
+
+  return canvas.toDataURL('image/png');
+}
+
+/* ==================== ساخت PDF ==================== */
+async function buildPdf() {
+  if (receipts.length === 0) throw new Error('رسیدی وجود ندارد');
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  const pageW = pdf.internal.pageSize.getWidth();
+  const pageH = pdf.internal.pageSize.getHeight();
+  const margin = 10;
+
+  for (let i = 0; i < receipts.length; i++) {
+    const r = receipts[i];
+    if (i > 0) pdf.addPage();
+
+    // ===== حاشیه طلایی تزئینی دور صفحه =====
+    pdf.setDrawColor(201, 162, 39);
+    pdf.setLineWidth(1.5);
+    pdf.rect(5, 5, pageW - 10, pageH - 10);
+
+    pdf.setDrawColor(212, 175, 55);
+    pdf.setLineWidth(0.5);
+    pdf.rect(7, 7, pageW - 14, pageH - 14);
+
+    // ===== هدر با اطلاعات =====
+    const headerImg = await createHeaderImage(r, i + 1, receipts.length, currentUser);
+    const headerHeight = 60;
+
+    pdf.addImage(headerImg, 'PNG', margin, margin + 3, pageW - margin * 2, headerHeight);
+
+    // ===== عکس رسید =====
+    const imgTop = margin + 3 + headerHeight + 5;
+    const maxW = pageW - margin * 2 - 6;
+    const maxH = pageH - imgTop - margin - 15;
+
+    const dims = await getImageDimensions(r.image);
+    const ratio = Math.min(maxW / dims.width, maxH / dims.height);
+    const w = dims.width * ratio;
+    const h = dims.height * ratio;
+    const x = (pageW - w) / 2;
+    const y = imgTop + (maxH - h) / 2;
+
+    const fmt = r.image.includes('image/png') ? 'PNG' : 'JPEG';
+
+    // کادر طلایی دور عکس
+    pdf.setDrawColor(201, 162, 39);
+    pdf.setLineWidth(0.6);
+    pdf.rect(x - 1.5, y - 1.5, w + 3, h + 3);
+
+    // گوشه‌های تزئینی دور عکس
+    pdf.setDrawColor(212, 175, 55);
+    pdf.setLineWidth(1.2);
+    const cs = 4;
+    // بالا چپ
+    pdf.line(x - 3, y - 3, x - 3 + cs, y - 3);
+    pdf.line(x - 3, y - 3, x - 3, y - 3 + cs);
+    // بالا راست
+    pdf.line(x + w + 3 - cs, y - 3, x + w + 3, y - 3);
+    pdf.line(x + w + 3, y - 3, x + w + 3, y - 3 + cs);
+    // پایین چپ
+    pdf.line(x - 3, y + h + 3, x - 3 + cs, y + h + 3);
+    pdf.line(x - 3, y + h + 3 - cs, x - 3, y + h + 3);
+    // پایین راست
+    pdf.line(x + w + 3 - cs, y + h + 3, x + w + 3, y + h + 3);
+    pdf.line(x + w + 3, y + h + 3 - cs, x + w + 3, y + h + 3);
+
+    pdf.addImage(r.image, fmt, x, y, w, h);
+
+    // ===== فوتر =====
+    const footerImg = await createFooterImage(i + 1, receipts.length);
+    pdf.addImage(footerImg, 'PNG', pageW / 2 - 25, pageH - margin - 10, 50, 6);
+  }
+
+  return pdf;
+}
 
 /* ==================== خروجی PDF ==================== */
 exportPdfBtn.addEventListener('click', async () => {
   if (receipts.length === 0) return;
-
   const originalText = exportPdfBtn.innerHTML;
   exportPdfBtn.disabled = true;
   exportPdfBtn.innerHTML = '<span>⏳</span> در حال ساخت...';
-
   try {
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    const pageW = pdf.internal.pageSize.getWidth();
-    const pageH = pdf.internal.pageSize.getHeight();
-    const margin = 12;
-
-    for (let i = 0; i < receipts.length; i++) {
-      const r = receipts[i];
-      if (i > 0) pdf.addPage();
-
-      // هدر طلایی
-      pdf.setFillColor(201, 162, 39);
-      pdf.rect(0, 0, pageW, 20, 'F');
-      pdf.setTextColor(255, 255, 255);
-      pdf.setFontSize(14);
-      pdf.text(`Receipt #${i + 1}`, pageW / 2, 13, { align: 'center' });
-
-      // اطلاعات
-      pdf.setTextColor(40, 40, 60);
-      pdf.setFontSize(11);
-      const infoY = 32;
-      pdf.text(`Name: ${r.fullName}`, margin, infoY);
-      pdf.text(`Class: ${r.classNumber}`, pageW - margin, infoY, { align: 'right' });
-
-      pdf.setFontSize(9);
-      pdf.setTextColor(120, 120, 140);
-      pdf.text(`Date: ${new Date(r.date).toLocaleString('en-GB')}`, margin, infoY + 7);
-
-      if (r.amount) {
-        pdf.setTextColor(138, 109, 14);
-        pdf.setFontSize(12);
-        pdf.text(`Amount: ${r.amount.toLocaleString()} IRT`, pageW - margin, infoY + 7, { align: 'right' });
-      }
-
-      if (r.description) {
-        pdf.setTextColor(80, 80, 100);
-        pdf.setFontSize(9);
-        pdf.text(`Note: ${r.description}`, margin, infoY + 14);
-      }
-
-      // عکس
-      const imgTop = infoY + 22;
-      const maxW = pageW - margin * 2;
-      const maxH = pageH - imgTop - margin - 10;
-
-      const dims = await getImageDimensions(r.image);
-      const ratio = Math.min(maxW / dims.width, maxH / dims.height);
-      const w = dims.width * ratio;
-      const h = dims.height * ratio;
-      const x = (pageW - w) / 2;
-      const y = imgTop + (maxH - h) / 2;
-
-      const fmt = r.image.includes('image/png') ? 'PNG' : 'JPEG';
-      pdf.addImage(r.image, fmt, x, y, w, h);
-
-      // فوتر
-      pdf.setFontSize(8);
-      pdf.setTextColor(150);
-      pdf.text(`${i + 1} / ${receipts.length}`, pageW / 2, pageH - 6, { align: 'center' });
-    }
-
-    pdf.save(`receipts-${Date.now()}.pdf`);
+    const pdf = await buildPdf();
+    pdf.save(`رسیدها-${currentUser}-${Date.now()}.pdf`);
     showToast('📄 PDF با موفقیت دانلود شد');
   } catch (err) {
     console.error(err);
@@ -1607,6 +1931,35 @@ exportPdfBtn.addEventListener('click', async () => {
   } finally {
     exportPdfBtn.disabled = false;
     exportPdfBtn.innerHTML = originalText;
+  }
+});
+
+/* ==================== چاپ ==================== */
+printBtn.addEventListener('click', async () => {
+  if (receipts.length === 0) return;
+  const originalText = printBtn.innerHTML;
+  printBtn.disabled = true;
+  printBtn.innerHTML = '<span>⏳</span> در حال آماده‌سازی...';
+  try {
+    const pdf = await buildPdf();
+    // باز کردن PDF در تب جدید برای چاپ
+    const blob = pdf.output('blob');
+    const url = URL.createObjectURL(blob);
+    const printWindow = window.open(url, '_blank');
+    if (printWindow) {
+      printWindow.addEventListener('load', () => {
+        setTimeout(() => printWindow.print(), 500);
+      });
+    } else {
+      showToast('⚠️ پاپ‌آپ بسته است. لطفاً اجازه بده.', 'error');
+    }
+    showToast('🖨️ پنجره چاپ باز شد');
+  } catch (err) {
+    console.error(err);
+    showToast('❌ خطا در آماده‌سازی چاپ', 'error');
+  } finally {
+    printBtn.disabled = false;
+    printBtn.innerHTML = originalText;
   }
 });
 
@@ -1623,16 +1976,35 @@ let toastTimer;
 function showToast(message, type = 'success') {
   clearTimeout(toastTimer);
   toast.textContent = message;
-  toast.style.borderColor = type === 'error'
-    ? 'rgba(239, 68, 68, 0.6)'
-    : 'var(--glass-border)';
+  toast.style.borderColor = type === 'error' ? 'rgba(239, 68, 68, 0.6)' : 'var(--glass-border)';
   toast.classList.add('show');
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-/* ==================== شروع ==================== */
-renderGallery();
-renderPendingPreviews();
+/* ==================== راه‌اندازی ==================== */
+function initApp() {
+  currentUser = getCurrentUser();
+  if (!currentUser) { showAuth(); return; }
+
+  const users = getUsers();
+  const user = users[currentUser];
+  if (!user) { setCurrentUser(null); showAuth(); return; }
+
+  userNameDisplay.textContent = user.username;
+  userAvatar.textContent = user.username.charAt(0).toUpperCase();
+
+  loadUserData();
+  showApp();
+  renderGallery();
+  renderPendingPreviews();
+}
+
+// اطمینان از لود فونت‌ها قبل از استفاده در Canvas
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => console.log('✅ فونت‌ها آماده هستند'));
+}
+
+initApp();
 </script>
 </body>
 </html>
