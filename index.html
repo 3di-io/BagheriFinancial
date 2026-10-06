@@ -204,6 +204,13 @@ button,input,textarea{font-family:inherit}
 .toast.show{transform:translate(-50%,0);opacity:1}
 .toast.error{border-right-color:#e5584b}
 
+
+/* ===== GSAP ===== */
+#scrollBar{position:fixed;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:100% 50%;z-index:150;pointer-events:none}
+.modal-head{cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none}
+.overlay.dragging .modal-head{cursor:grabbing}
+.overlay.dragging .modal{box-shadow:0 35px 90px rgba(0,0,0,.55)}
+
 @media(max-width:720px){
   .stats{grid-template-columns:1fr}.capture{grid-template-columns:1fr}.details{grid-template-columns:1fr}
   .gallery{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;padding:14px}
@@ -258,7 +265,7 @@ button,input,textarea{font-family:inherit}
     </section>
 
     <section class="card">
-      <div class="card-head"><h2><svg class="i" viewBox="0 0 24 24" data-i="save"></svg>ثبت رسید جدید</h2></div>
+      <div class="card-head"><h2><svg class="i" viewBox="0 0 24 24" data-i="save"></svg><span class="st">ثبت رسید جدید</span></h2></div>
       <div class="card-body">
         <div class="capture">
           <div class="drop" id="cameraBtn" tabindex="0"><svg class="i" viewBox="0 0 24 24" data-i="camera"></svg><b>گرفتن عکس با دوربین</b><small>استفاده از دوربین دستگاه</small></div>
@@ -281,7 +288,7 @@ button,input,textarea{font-family:inherit}
     </section>
 
     <section class="card">
-      <div class="card-head"><h2><svg class="i" viewBox="0 0 24 24" data-i="pdf"></svg>آرشیو رسیدها</h2><span class="badge" id="countText">۰ رسید</span></div>
+      <div class="card-head"><h2><svg class="i" viewBox="0 0 24 24" data-i="pdf"></svg><span class="st">آرشیو رسیدها</span></h2><span class="badge" id="countText">۰ رسید</span></div>
       <div class="toolbar">
         <div class="search"><svg class="i" viewBox="0 0 24 24" data-i="search"></svg><input type="text" id="searchInput" placeholder="جستجو بر اساس نام، کلاس یا توضیحات..."></div>
         <div class="export-panel">
@@ -323,7 +330,7 @@ button,input,textarea{font-family:inherit}
 </div>
 
 <div class="overlay" id="adminLoginModal"><div class="modal" style="max-width:400px">
-  <div class="modal-head"><h3>ورود به پنل مدیریت</h3><button class="modal-x" onclick="closeModal('adminLoginModal')"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
+  <div class="modal-head" title="برای جابه‌جایی بکشید"><h3>ورود به پنل مدیریت</h3><button class="modal-x" onclick="closeModal('adminLoginModal')"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
   <div class="modal-body"><div id="adminError" class="auth-error"></div>
     <form id="adminForm">
       <div class="field"><label>نام کاربری مدیر</label><input type="text" id="adUser" autocomplete="off"></div>
@@ -333,7 +340,7 @@ button,input,textarea{font-family:inherit}
 </div></div>
 
 <div class="overlay" id="editModal"><div class="modal">
-  <div class="modal-head"><h3>ویرایش رسید</h3><button class="modal-x" onclick="closeModal('editModal')"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
+  <div class="modal-head" title="برای جابه‌جایی بکشید"><h3>ویرایش رسید</h3><button class="modal-x" onclick="closeModal('editModal')"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
   <div class="modal-body"><form id="editForm">
     <div class="form-grid" style="margin-top:0">
       <div class="field"><label>نام <b>*</b></label><input type="text" id="eFirst"></div>
@@ -347,15 +354,16 @@ button,input,textarea{font-family:inherit}
 </div></div>
 
 <div class="overlay" id="viewModal"><div class="modal">
-  <div class="modal-head"><h3>جزئیات رسید</h3><button class="modal-x" onclick="closeModal('viewModal')"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
+  <div class="modal-head" title="برای جابه‌جایی بکشید"><h3>جزئیات رسید</h3><button class="modal-x" onclick="closeModal('viewModal')"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
   <div class="modal-body"><img id="modalImage" alt="رسید"><div class="details" id="modalDetails"></div></div>
 </div></div>
 
 <div class="overlay" id="cameraModal"><div class="modal">
-  <div class="modal-head"><h3>گرفتن عکس</h3><button class="modal-x" onclick="closeCamera()"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
+  <div class="modal-head" title="برای جابه‌جایی بکشید"><h3>گرفتن عکس</h3><button class="modal-x" onclick="closeCamera()"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
   <div class="modal-body"><video class="cam" id="cameraVideo" autoplay playsinline></video><canvas id="cameraCanvas" hidden></canvas><button class="shutter" id="shutterBtn" title="گرفتن عکس"></button></div>
 </div></div>
 
+<div id="scrollBar"></div>
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1041,6 +1049,125 @@ $('adCsv').addEventListener('click', () => {
 /* ==================== راه‌اندازی ==================== */
 if (sessionStorage.getItem('authenticated') === 'true' && sessionStorage.getItem('currentUser')) enterApp();
 else setTimeout(() => $('usernameInput').focus(), 300);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script>
+/* ==================== GSAP: SplitText + ScrollTrigger + Draggable ==================== */
+(function () {
+  if (!window.gsap) return;                       // اگر CDN لود نشد، سایت مثل قبل کار می‌کند
+  const hasST = !!window.ScrollTrigger, hasSplit = !!window.SplitText, hasDrag = !!window.Draggable;
+  gsap.registerPlugin(...[window.ScrollTrigger, window.Draggable, window.SplitText].filter(Boolean));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const EASE = 'power3.out';
+  const st = (el, start = 'top 92%') => hasST ? { trigger: el, start, once: true } : undefined;
+
+  /* ---------- SplitText: متن‌ها (به‌صورت «کلمه»؛ جدا کردن حروف، اتصال حروف فارسی را خراب می‌کند) ---------- */
+  const TEXT = {
+    authPage: ['#authPage .auth-card h1', '#authPage .auth-card p'],
+    appPage: ['#appPage .brand h1', '#appPage .brand span', '#appPage .stat small', '#appPage .card-head h2 .st', '#appPage .drop b', '#appPage .drop small'],
+    adminPage: ['#adminPage .brand h1', '#adminPage .brand span']
+  };
+  function splitReveal(sel) {
+    document.querySelectorAll(sel).forEach(el => {
+      if (!hasSplit) return;
+      SplitText.create(el, {
+        type: 'words', autoSplit: true,
+        onSplit(self) {
+          if (!self.words.length) return;
+          return gsap.from(self.words, { yPercent: 90, autoAlpha: 0, duration: .8, stagger: .07, ease: EASE, scrollTrigger: st(el) });
+        }
+      });
+    });
+  }
+  const reveal = (sel, vars = {}) => document.querySelectorAll(sel).forEach(el =>
+    gsap.from(el, Object.assign({ autoAlpha: 0, y: 36, duration: .8, ease: EASE, scrollTrigger: st(el) }, vars)));
+
+  /* ---------- ورود هر صفحه ---------- */
+  const ctxs = {};
+  const ENTER = {
+    authPage() {
+      gsap.from('#authPage .auth-card', { autoAlpha: 0, y: 40, scale: .96, duration: .8, ease: EASE });
+      gsap.from('#authPage .logo', { scale: 0, rotate: -90, duration: .8, ease: 'back.out(1.8)', delay: .15 });
+      gsap.from('#authPage .pw, #authPage .btn-block', { autoAlpha: 0, y: 22, duration: .6, stagger: .1, delay: .35, ease: 'power2.out' });
+    },
+    appPage() {
+      gsap.from('#appPage .topbar', { yPercent: -100, duration: .7, ease: EASE });
+      gsap.from('#appPage .top-actions .icon-btn', { scale: 0, duration: .5, stagger: .08, delay: .3, ease: 'back.out(2)' });
+      reveal('#appPage .stat'); reveal('#appPage .card');
+    },
+    adminPage() {
+      gsap.from('#adminPage .topbar', { yPercent: -100, duration: .7, ease: EASE });
+      reveal('#adminPage .stat', { y: 24 }); reveal('#adminPage .card');
+    }
+  };
+  function enter(id) {
+    if (!ENTER[id]) return;
+    if (ctxs[id]) ctxs[id].revert();
+    ctxs[id] = gsap.context(() => { (TEXT[id] || []).forEach(splitReveal); ENTER[id](); });
+    if (hasST) requestAnimationFrame(() => ScrollTrigger.refresh());
+  }
+
+  /* ---------- ScrollTrigger: کارت‌های آرشیو (فقط کارت‌های جدید انیمیت می‌شوند) ---------- */
+  const seen = new Set(); let cardTriggers = [];
+  function animateCards() {
+    if (!hasST || reduce) return;
+    cardTriggers.forEach(t => t.kill()); cardTriggers = [];
+    const fresh = [...document.querySelectorAll('#gallery .rc')].filter(c => {
+      const id = c.querySelector('.rc-img').dataset.id;
+      if (seen.has(id)) return false; seen.add(id); return true;
+    });
+    if (!fresh.length) return;
+    gsap.set(fresh, { autoAlpha: 0, y: 40, scale: .96 });
+    cardTriggers = ScrollTrigger.batch(fresh, {
+      start: 'top 94%', once: true,
+      onEnter: b => gsap.to(b, { autoAlpha: 1, y: 0, scale: 1, duration: .7, stagger: .07, ease: EASE, overwrite: true, clearProps: 'opacity,visibility,transform' })
+    });
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+  }
+
+  /* ---------- نوار پیشرفت اسکرول ---------- */
+  if (hasST && !reduce) gsap.to('#scrollBar', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+
+  /* ---------- Draggable: پنجره‌های مودال با کشیدن هدر جابه‌جا می‌شوند ---------- */
+  if (hasDrag) ['viewModal', 'editModal', 'adminLoginModal', 'cameraModal'].forEach(id => {
+    const ov = document.getElementById(id), m = ov.querySelector('.modal'), head = ov.querySelector('.modal-head');
+    let justDragged = false;
+    const d = Draggable.create(m, {
+      type: 'x,y', trigger: head, bounds: ov, dragClickables: false, edgeResistance: .9,
+      onPress() { ov.classList.add('dragging'); },
+      onRelease() { ov.classList.remove('dragging'); },
+      onDragEnd() { justDragged = true; setTimeout(() => justDragged = false, 80); }
+    })[0];
+    // جلوگیری از بسته‌شدن ناخواسته مودال (کلیک روی پس‌زمینه) درست بعد از رها کردن
+    ov.addEventListener('click', e => { if (justDragged) { e.stopImmediatePropagation(); e.stopPropagation(); } }, true);
+    new MutationObserver(() => {
+      if (!ov.classList.contains('show')) return;
+      gsap.killTweensOf(m); gsap.set(m, { x: 0, y: 0 });       // هر بار از وسط صفحه شروع شود
+      if (reduce) return d.applyBounds();
+      gsap.fromTo(m, { autoAlpha: 0, scale: .94, y: 24 }, { autoAlpha: 1, scale: 1, y: 0, duration: .45, ease: 'back.out(1.5)', onComplete: () => d.applyBounds() });
+    }).observe(ov, { attributes: true, attributeFilter: ['class'] });
+  });
+
+  /* ---------- اتصال به منطق موجود سایت (بدون تغییر در کدهای قبلی) ---------- */
+  const _showPage = window.showPage, _render = window.renderGallery, _enterApp = window.enterApp;
+  window.showPage = function (id) {
+    _showPage.apply(this, arguments);
+    Object.keys(ctxs).forEach(k => { if (k !== id) { ctxs[k].revert(); delete ctxs[k]; } });
+    if (!reduce) requestAnimationFrame(() => enter(id));
+  };
+  window.renderGallery = function () { const r = _render.apply(this, arguments); animateCards(); return r; };
+  window.enterApp = function () { seen.clear(); return _enterApp.apply(this, arguments); };
+
+  // اجرای اولیه (بعد از لود فونت تا شکستن خطوط درست محاسبه شود)
+  const start = () => {
+    const active = document.querySelector('.page.active');
+    if (active && !reduce) { enter(active.id); if (active.id === 'appPage') animateCards(); }
+  };
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(start);
+})();
 </script>
 </body>
 </html>
